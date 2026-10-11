@@ -3,25 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Atelier Réclame</title>
-<meta name="description" content="On crée vos publicités : visuels pour les réseaux sociaux, vidéos courtes et sites promo. Devis gratuit, fichiers prêts à publier.">
+<title>Vif Visuel</title>
+<meta name="description" content="Envoyez vos photos, on en fait une pub : vidéos courtes et visuels pour les réseaux sociaux. Devis gratuit, fichiers prêts à publier.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-/* Layout : héros plein cobalt où les pubs réalisées s'étalent comme sur une table, puis une page courte qui mène au formulaire. */
+/* Layout : héros mandarine avec une vraie pub vidéo qui tourne, puis exemples, offres, et tout mène au formulaire. */
 :root {
-  --bg: #F7F6F2;
+  --bg: #FBF8F4;
   --surface: #FFFFFF;
-  --ink: #16142A;
-  --muted: #5D5B70;
-  --line: #E1DFE8;
-  --brand: #2C3FE0;      /* cobalt, surface du héros dans les deux thèmes */
-  --brand-ink: #FFFFFF;
-  --sun: #FFCF3A;        /* surligneur */
-  --coral: #FF6B57;
-  --tint: #ECEEFF;
-  --ok: #18875A;
+  --ink: #1E1426;        /* prune très sombre */
+  --muted: #625869;
+  --line: #EAE3E6;
+  --brand: #FF5B2E;      /* mandarine, surface du héros dans les deux thèmes */
+  --brand-ink: #1E1426;
+  --lilac: #CDBDFF;      /* surligneur */
+  --tint: #FFEDE5;
+  --ok: #1B8A5C;
   --f-display: "Bricolage Grotesque", "Arial Rounded MT Bold", "Helvetica Neue", Arial, sans-serif;
   --f-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -30,98 +29,71 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #121124; --surface: #1C1A33; --ink: #F1F0F8; --muted: #ADABC3; --line: #2E2C4A;
-    --brand: #2C3FE0; --tint: #222451; --ok: #5CD49B; color-scheme: dark;
+    --bg: #150E1B; --surface: #20172A; --ink: #F5EFF7; --muted: #B4A9BB; --line: #33283D;
+    --tint: #2C1A1E; --ok: #5CD49B; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #121124; --surface: #1C1A33; --ink: #F1F0F8; --muted: #ADABC3; --line: #2E2C4A;
-  --brand: #2C3FE0; --tint: #222451; --ok: #5CD49B; color-scheme: dark;
+  --bg: #150E1B; --surface: #20172A; --ink: #F5EFF7; --muted: #B4A9BB; --line: #33283D;
+  --tint: #2C1A1E; --ok: #5CD49B; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; overflow-x: clip; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; }
 [hidden] { display: none !important; }
-button, input, select, textarea { font: inherit; color: inherit; }
+button, input, textarea { font: inherit; color: inherit; }
 button { cursor: pointer; }
-:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--lilac); outline-offset: 3px; border-radius: 6px; }
 h1, h2, h3 { font-family: var(--f-display); font-weight: 800; line-height: 1; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
 h2 { font-size: clamp(2.3rem, 5.2vw, 3.8rem); }
-h3 { font-size: 1.45rem; letter-spacing: -.015em; }
+h3 { font-size: 1.4rem; letter-spacing: -.015em; }
 p { margin: 0; }
 .wrap { max-width: 1180px; margin-inline: auto; padding-inline: var(--gutter); }
 .eyebrow { font: 500 .74rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--brand); }
 .lede { color: var(--muted); max-width: 58ch; font-size: 1.08rem; }
-.hl { background: var(--sun); color: #16142A; padding: 0 .14em; border-radius: .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hl { background: var(--lilac); color: #1E1426; padding: 0 .14em; border-radius: .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 section { padding-block: clamp(64px, 9vw, 112px); }
 .section-head { display: grid; gap: 14px; margin-bottom: 40px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 999px; padding: 14px 26px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s, background .2s; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 999px; padding: 14px 26px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform .2s cubic-bezier(.2,.8,.2,1), box-shadow .2s; }
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0) scale(.98); }
 .btn .arr { transition: transform .2s; }
 .btn:hover .arr { transform: translateX(4px); }
-.btn-sun { background: var(--sun); color: #16142A; box-shadow: 0 10px 24px -12px rgba(255, 207, 58, .9); }
+.btn-dark { background: #1E1426; color: #FFFFFF; box-shadow: 0 12px 24px -14px rgba(30,20,38,.8); }
+.btn-brand { background: var(--brand); color: #1E1426; box-shadow: 0 12px 24px -14px rgba(255,91,46,.9); }
 .btn-ink { background: var(--ink); color: var(--bg); }
 .btn-line { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
 
-/* En-tête posé sur le héros */
-header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; transition: background .25s, box-shadow .25s, color .25s; color: var(--brand-ink); }
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; transition: background .25s, box-shadow .25s, color .25s; color: #1E1426; }
 header.site.solid { background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--line); color: var(--ink); }
 header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
-.logo { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em; text-decoration: none; color: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
-.logo i { width: 14px; height: 14px; border-radius: 50%; background: var(--sun); display: inline-block; }
+.logo { font-family: var(--f-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -.03em; text-decoration: none; color: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; }
+.logo i { width: 22px; height: 22px; border-radius: 7px; background: #1E1426; display: inline-grid; place-items: center; transform: rotate(-8deg); }
+.logo i::after { content: ""; width: 0; height: 0; border-left: 8px solid var(--lilac); border-top: 5px solid transparent; border-bottom: 5px solid transparent; margin-left: 2px; }
 nav.main { display: flex; gap: 26px; }
 nav.main a { color: inherit; opacity: .8; text-decoration: none; font-weight: 500; }
 nav.main a:hover { opacity: 1; }
 header.site .btn { padding: 10px 18px; font-size: .95rem; }
+header.site:not(.solid) .btn-brand { background: #1E1426; color: #fff; }
 @media (max-width: 820px) { nav.main { display: none; } }
 
 /* Héros */
 .hero { background: var(--brand); color: var(--brand-ink); margin-top: -70px; padding-top: calc(70px + clamp(30px, 6vw, 70px)); padding-bottom: clamp(56px, 8vw, 96px); position: relative; overflow: hidden; }
-.hero::after { content: ""; position: absolute; inset: auto -10% -40% auto; width: 60vw; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.14), transparent 65%); pointer-events: none; }
-.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 60px); align-items: center; position: relative; z-index: 1; }
+.hero::before { content: ""; position: absolute; width: 46vw; aspect-ratio: 1; border-radius: 50%; right: -12vw; top: -14vw; background: radial-gradient(circle, rgba(255,255,255,.28), transparent 62%); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(28px, 5vw, 56px); align-items: center; position: relative; z-index: 1; }
 @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; } }
 .hero-copy { display: grid; gap: 24px; min-width: 0; }
-.hero .eyebrow { color: var(--sun); }
-.hero h1 { font-size: clamp(3rem, 7.6vw, 6.2rem); }
-.hero .lede { color: rgba(255,255,255,.82); }
+.hero .eyebrow { color: #1E1426; opacity: .75; }
+.hero h1 { font-size: clamp(3rem, 7vw, 5.8rem); }
+.hero .lede { color: rgba(30,20,38,.82); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-.reassure { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .92rem; color: rgba(255,255,255,.85); }
-.reassure span::before { content: "✓"; color: var(--sun); font-weight: 700; margin-right: 7px; }
-
-/* Table de pubs */
-.table { position: relative; height: clamp(380px, 46vw, 520px); min-width: 0; }
-.ad { position: absolute; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 50px -24px rgba(8, 6, 40, .65); transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .3s; will-change: transform; color: #2A1F2D; text-decoration: none; }
-.ad:hover { z-index: 5; }
-.ad-story { width: 40%; aspect-ratio: 9 / 16; left: 4%; top: 4%; --r: -7deg; }
-.ad-post { width: 44%; aspect-ratio: 1; right: 2%; top: 0; --r: 6deg; }
-.ad-banner { width: 64%; aspect-ratio: 16 / 9; right: 6%; bottom: 0; --r: -2deg; }
-.ad { transform: rotate(var(--r)) translate(var(--px, 0), var(--py, 0)); }
-.ad:hover { transform: rotate(0deg) scale(1.05); }
-.ad-tag { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); }
-.ad-label { position: absolute; left: 10px; bottom: 10px; z-index: 2; background: rgba(22,20,42,.82); color: #fff; font: 500 .66rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; }
-@media (max-width: 920px) { .table { height: min(560px, 118vw); } }
-@media (max-width: 600px) { .ad-label { display: none; } .s-post .bottom { padding: 7%; } .s-post .s-cta { display: none; } }
-
-/* Pubs SorienkaStudio */
-.s-story { height: 100%; background: linear-gradient(170deg, #F6DDE0, #E8B4BB); padding: 12% 10%; display: flex; flex-direction: column; justify-content: space-between; font-family: "Italiana", Didot, Georgia, serif; }
-.s-brand { font: 600 .62rem var(--f-body); letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
-.s-title { font-family: Didot, "Bodoni 72", Georgia, serif; font-size: clamp(1.05rem, 2.3vw, 1.5rem); line-height: 1.05; }
-.s-title i { font-style: normal; color: #2F6F5C; }
-.s-cta { align-self: flex-start; background: #2A1F2D; color: #F4F2F6; font: 600 .7rem var(--f-body); padding: 6px 12px; border-radius: 999px; }
-.s-pill { font: 500 .62rem var(--f-mono); background: #fff; padding: 3px 8px; border-radius: 999px; align-self: flex-start; }
-.s-art { width: 70%; align-self: center; }
-.s-post { height: 100%; background: #E4DFE8; display: grid; grid-template-rows: 1fr auto; }
-.s-post .top { display: grid; place-items: center; position: relative; }
-.s-post .top svg { width: 46%; }
-.s-post .bottom { background: #2A1F2D; color: #F4F2F6; padding: 9% 9%; display: flex; justify-content: space-between; align-items: end; gap: 8px; }
-.s-post .big { font-family: Didot, "Bodoni 72", Georgia, serif; font-size: clamp(.82rem, 2.2vw, 1.5rem); line-height: 1; }
-.s-post small { font: 500 .6rem var(--f-mono); opacity: .75; display: block; margin-top: 4px; }
-.s-banner { height: 100%; background: #2A1F2D; color: #F4F2F6; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; padding: 0 7%; gap: 4%; }
-.s-banner .t { font-family: Didot, "Bodoni 72", Georgia, serif; font-size: clamp(1rem, 2.4vw, 1.7rem); line-height: 1.02; }
-.s-banner .t b { font-weight: 400; color: #E8B4BB; }
-.s-banner .k { font: 500 .62rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #86CBB4; margin-bottom: 6px; display: block; }
-.s-banner svg { width: 100%; max-height: 80%; }
+.reassure { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .94rem; font-weight: 500; }
+.reassure span::before { content: "✓"; font-weight: 800; margin-right: 7px; }
+.screen { position: relative; border-radius: 18px; background: #1E1426; padding: 10px; box-shadow: 0 40px 60px -30px rgba(30,20,38,.75); transform: rotate(1.5deg); transition: transform .5s cubic-bezier(.2,.8,.2,1); min-width: 0; }
+.screen:hover { transform: rotate(0) scale(1.01); }
+.screen video { width: 100%; aspect-ratio: 16 / 9; display: block; border-radius: 10px; background: #000; object-fit: cover; }
+.sound { position: absolute; right: 22px; bottom: 22px; border: 0; background: rgba(255,255,255,.92); color: #1E1426; border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: .85rem; display: inline-flex; align-items: center; gap: 8px; }
+.sticker { position: absolute; left: -10px; top: -18px; z-index: 2; background: var(--lilac); color: #1E1426; font: 500 .74rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-radius: 10px; transform: rotate(-6deg); box-shadow: 0 10px 20px -12px rgba(30,20,38,.6); }
 
 /* Bande humain + IA */
 .ia { background: var(--surface); border-bottom: 1px solid var(--line); padding-block: 34px; }
@@ -132,93 +104,104 @@ header.site .btn { padding: 10px 18px; font-size: .95rem; }
 .ia-body { display: grid; gap: 10px; min-width: 0; }
 .ia-bar { display: flex; height: 14px; border-radius: 999px; overflow: hidden; background: var(--tint); }
 .ia-bar .h { background: var(--brand); }
-.ia-bar .a { background: var(--sun); }
+.ia-bar .a { background: var(--lilac); }
 .ia-legend { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: .92rem; color: var(--muted); }
 .ia-legend b { color: var(--ink); font-weight: 600; }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 7px; vertical-align: 1px; }
 
-/* Réalisations */
-.work { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 60px); align-items: center; }
-@media (max-width: 900px) { .work { grid-template-columns: 1fr; } }
-.work-copy { display: grid; gap: 18px; min-width: 0; }
-.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-.tab { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 9px 16px; font-weight: 600; font-size: .92rem; transition: background .2s, color .2s; }
-.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.work-detail { display: grid; gap: 10px; min-height: 9.5em; }
-.work-detail ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 4px; }
-.work-stage { background: var(--tint); border-radius: 24px; padding: clamp(20px, 4vw, 40px); display: grid; place-items: center; min-height: 440px; position: relative; overflow: hidden; }
-.work-stage > div { width: 100%; display: grid; place-items: center; animation: pop .45s cubic-bezier(.2,.8,.2,1); }
-@keyframes pop { from { transform: translateY(12px) scale(.98); } to { transform: none; } }
-.ws-story { width: min(230px, 70%); aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 50px -28px rgba(8,6,40,.6); }
-.ws-post { width: min(340px, 90%); aspect-ratio: 1; border-radius: 18px; overflow: hidden; box-shadow: 0 30px 50px -28px rgba(8,6,40,.6); }
-.ws-banner { width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 50px -28px rgba(8,6,40,.6); }
-.browser { width: 100%; border-radius: 14px; overflow: hidden; background: #F4F2F6; box-shadow: 0 30px 50px -28px rgba(8,6,40,.6); color: #2A1F2D; }
-.browser .chrome { display: flex; gap: 6px; padding: 10px 12px; background: #E4DFE8; align-items: center; }
-.browser .chrome i { width: 10px; height: 10px; border-radius: 50%; background: #CFC7D6; }
-.browser .chrome span { margin-left: 10px; font: 500 .66rem var(--f-mono); color: #6D6372; background: #F4F2F6; padding: 3px 10px; border-radius: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.browser .bar { background: #2A1F2D; color: #F4F2F6; font: 500 .62rem var(--f-mono); text-align: center; padding: 6px; }
-.browser .body { display: grid; grid-template-columns: 1.2fr .8fr; gap: 12px; padding: 22px; align-items: center; }
-.browser h4 { margin: 0; font-family: Didot, "Bodoni 72", Georgia, serif; font-weight: 400; font-size: clamp(1.3rem, 3vw, 2rem); line-height: 1.04; }
-.browser h4 i { font-style: normal; color: #2F6F5C; }
-.browser .sw { display: flex; gap: 6px; margin-top: 12px; }
-.browser .sw i { width: 16px; height: 16px; border-radius: 50%; }
-.browser .orb { aspect-ratio: 1; max-width: 100%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #E4DFE8 70%); display: grid; place-items: center; }
-.browser .orb svg { width: 64%; }
-.browser .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 0 22px 22px; }
-.browser .cards div { aspect-ratio: 4 / 3; border-radius: 8px; background: #E4DFE8; display: grid; place-items: center; }
-.browser .cards svg { width: 50%; }
+/* Exemples */
+.reel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 900px) { .reel { grid-template-columns: 1fr; } }
+.clip { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.clip-frame { position: relative; border-radius: 16px; overflow: hidden; background: #1E1426; aspect-ratio: 16 / 9; max-width: 100%; }
+.clip-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.play { position: absolute; inset: 0; border: 0; background: linear-gradient(transparent 50%, rgba(30,20,38,.55)); display: grid; place-items: center; }
+.play span { width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,.95); display: grid; place-items: center; transition: transform .2s; box-shadow: 0 10px 24px -8px rgba(0,0,0,.5); }
+.play span::after { content: ""; border-left: 18px solid #1E1426; border-top: 11px solid transparent; border-bottom: 11px solid transparent; margin-left: 5px; }
+.play:hover span { transform: scale(1.08); }
+.clip b { font-weight: 600; }
+.clip small { color: var(--muted); display: block; }
+.clip .len { font: 500 .74rem var(--f-mono); color: var(--muted); }
+
+/* Deux façons de travailler */
+.ways { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 820px) { .ways { grid-template-columns: 1fr; } }
+.way { border-radius: 22px; padding: clamp(22px, 3.5vw, 34px); display: grid; gap: 14px; align-content: start; min-width: 0; }
+.way-a { background: var(--tint); }
+.way-b { background: var(--surface); border: 1px solid var(--line); }
+.way .tag { justify-self: start; font: 500 .72rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--ink); color: var(--bg); }
+.way ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 4px; }
+.way .btn { justify-self: start; margin-top: 4px; }
 
 /* Offres */
 .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
 @media (max-width: 900px) { .plans { grid-template-columns: 1fr; } }
 .plan { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; display: grid; gap: 16px; align-content: start; grid-template-rows: auto auto auto 1fr auto; min-width: 0; transition: transform .25s, box-shadow .25s; }
-.plan:hover { transform: translateY(-4px); box-shadow: 0 24px 40px -30px rgba(22,20,42,.5); }
-.plan.star { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); position: relative; }
-.plan.star .muted { color: rgba(255,255,255,.8); }
-.plan .flag { justify-self: start; background: var(--sun); color: #16142A; font: 500 .7rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
+.plan:hover { transform: translateY(-4px); box-shadow: 0 24px 40px -30px rgba(30,20,38,.5); }
+.plan.star { background: #1E1426; color: #FFFFFF; border-color: #1E1426; }
+.plan.star .muted { color: rgba(255,255,255,.75); }
+.plan .flag { justify-self: start; background: var(--lilac); color: #1E1426; font: 500 .7rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
 .plan .muted { color: var(--muted); }
 .plan .price { font-family: var(--f-display); font-weight: 800; font-size: 3.2rem; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
 .plan .price small { font-family: var(--f-body); font-size: .9rem; font-weight: 500; letter-spacing: 0; opacity: .75; }
 .plan ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; align-content: start; }
 .plan li { display: grid; grid-template-columns: 20px 1fr; gap: 8px; }
 .plan li::before { content: "✓"; font-weight: 700; color: var(--ok); }
-.plan.star li::before { color: var(--sun); }
+.plan.star li::before { color: var(--lilac); }
 .plan .btn { width: 100%; }
 .custom { margin-top: 18px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; padding: 20px 24px; border: 2px dashed var(--line); border-radius: 18px; }
 .custom p { color: var(--muted); }
 .custom b { color: var(--ink); }
 
-/* Méthode */
-.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+/* Étapes */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 48px; }
 @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
 .step { display: grid; gap: 10px; align-content: start; padding-top: 18px; border-top: 3px solid var(--ink); min-width: 0; }
 .step .n { font: 500 .78rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
 .step p { color: var(--muted); }
 
 /* Contact */
-.contact-section { background: var(--ink); color: var(--bg); }
+.contact-section { background: #1E1426; color: #F5EFF7; }
 .contact { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
 @media (max-width: 900px) { .contact { grid-template-columns: 1fr; } }
 .contact-copy { display: grid; gap: 18px; min-width: 0; }
-.contact-copy .eyebrow { color: var(--sun); }
-.contact-copy .lede { color: color-mix(in srgb, var(--bg) 75%, var(--ink)); }
+.contact-copy .eyebrow { color: var(--lilac); }
+.contact-copy .lede { color: rgba(245,239,247,.75); }
 .promise { display: grid; gap: 12px; margin-top: 8px; }
 .promise div { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center; }
-.promise i { width: 34px; height: 34px; border-radius: 50%; background: color-mix(in srgb, var(--bg) 12%, transparent); display: grid; place-items: center; font-style: normal; color: var(--sun); font-weight: 700; }
-form.brief { background: var(--surface); color: var(--ink); border-radius: 24px; padding: clamp(20px, 3.5vw, 32px); display: grid; gap: 16px; min-width: 0; }
+.promise i { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.1); display: grid; place-items: center; font-style: normal; color: var(--brand); font-weight: 700; }
+form.brief { background: var(--surface); color: var(--ink); border-radius: 24px; padding: clamp(20px, 3.5vw, 32px); display: grid; gap: 18px; min-width: 0; }
 .fieldset { display: grid; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
-.fieldset legend, label.f > span { font: 500 .74rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 8px; }
+.fieldset legend, label.f > span, .lbl { font: 500 .74rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 0; margin-bottom: 8px; display: block; }
 .pick { display: flex; flex-wrap: wrap; gap: 8px; }
 .pick button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 8px 14px; font-weight: 500; font-size: .92rem; transition: background .15s, border-color .15s; }
-.pick button[aria-pressed="true"] { background: var(--brand); color: var(--brand-ink); border-color: var(--brand); }
+.pick button[aria-pressed="true"] { background: var(--brand); color: #1E1426; border-color: var(--brand); }
+.mode { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 520px) { .mode { grid-template-columns: 1fr; } }
+.mode button { text-align: left; border: 1px solid var(--line); background: var(--bg); border-radius: 14px; padding: 12px 14px; display: grid; gap: 2px; }
+.mode button b { font-weight: 600; }
+.mode button small { color: var(--muted); }
+.mode button[aria-pressed="true"] { border-color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); background: var(--tint); }
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 520px) { .two { grid-template-columns: 1fr; } }
 label.f { display: grid; min-width: 0; }
 .f input, .f textarea { width: 100%; min-width: 0; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 1rem; transition: border-color .15s; }
-.f input:focus, .f textarea:focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent); }
+.f input:focus, .f textarea:focus { border-color: var(--brand); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 25%, transparent); }
 .f textarea { min-height: 110px; resize: vertical; }
-form.brief .btn-sun { width: 100%; font-size: 1.05rem; padding-block: 16px; }
+.drop { position: relative; border: 2px dashed var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 6px; justify-items: center; text-align: center; background: var(--bg); transition: border-color .15s, background .15s; cursor: pointer; }
+.drop:hover, .drop.over { border-color: var(--brand); background: var(--tint); }
+.drop b { font-weight: 600; }
+.drop small { color: var(--muted); }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.drop:focus-within { outline: 3px solid var(--lilac); outline-offset: 3px; }
+.thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.thumbs:empty { display: none; }
+.thumbs figure { margin: 0; width: 64px; height: 64px; border-radius: 10px; overflow: hidden; position: relative; background: var(--line); }
+.thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumbs button { position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; border-radius: 50%; border: 0; background: rgba(30,20,38,.8); color: #fff; font-size: .75rem; line-height: 1; }
+form.brief .btn-brand { width: 100%; font-size: 1.05rem; padding-block: 16px; }
 .form-msg { font-size: .94rem; }
+.form-msg:empty { display: none; }
 .form-msg.ok { color: var(--ok); }
 .form-msg.err { color: #C2412D; }
 .summary { white-space: pre-wrap; font: 400 .84rem/1.5 var(--f-mono); background: var(--bg); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; overflow-x: auto; margin: 0; }
@@ -236,24 +219,18 @@ form.brief .btn-sun { width: 100%; font-size: 1.05rem; padding-block: 16px; }
 footer.site { border-top: 1px solid var(--line); padding-block: 32px; color: var(--muted); font-size: .9rem; }
 footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
 
-/* Bouton fixe mobile */
 .mobile-cta { position: fixed; left: 16px; right: 16px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 40; display: none; transform: translateY(160%); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
 .mobile-cta.show { transform: none; }
-.mobile-cta .btn { width: 100%; box-shadow: 0 14px 30px -10px rgba(0,0,0,.45); }
+.mobile-cta .btn { width: 100%; }
 @media (max-width: 760px) { .mobile-cta { display: block; } }
-
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 180%); background: var(--ink); color: var(--bg); padding: 12px 20px; border-radius: 999px; z-index: 60; transition: transform .35s cubic-bezier(.2,.8,.2,1); font-weight: 500; max-width: calc(100% - 32px); text-align: center; }
 .toast.show { transform: translate(-50%, 0); }
 
 @keyframes rise { from { transform: translateY(16px); } to { transform: none; } }
-.hero-copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+.hero-copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) backwards; }
 .hero-copy > *:nth-child(2) { animation-delay: .05s; }
 .hero-copy > *:nth-child(3) { animation-delay: .1s; }
 .hero-copy > *:nth-child(4) { animation-delay: .15s; }
-@keyframes deal { from { transform: rotate(0) translateY(30px) scale(.94); } }
-.table .ad { animation: deal .8s cubic-bezier(.2,.8,.2,1) backwards; }
-.table .ad-post { animation-delay: .12s; }
-.table .ad-banner { animation-delay: .24s; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
@@ -264,14 +241,14 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 
 <header class="site" id="header">
   <div class="wrap">
-    <a class="logo" href="#top"><i></i>Atelier Réclame</a>
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Vif Visuel</a>
     <nav class="main" aria-label="Navigation principale">
-      <a href="#realisations">Réalisations</a>
-      <a href="#offres">Offres</a>
+      <a href="#exemples">Exemples</a>
       <a href="#methode">Comment ça marche</a>
+      <a href="#offres">Offres</a>
       <a href="#faq">Questions</a>
     </nav>
-    <a class="btn btn-sun" href="#contact">Devis gratuit</a>
+    <a class="btn btn-brand" href="#contact">Devis gratuit</a>
   </div>
 </header>
 
@@ -279,61 +256,85 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="eyebrow">Création publicitaire pour les entreprises</span>
-        <h1>Votre pub, <span class="hl">prête à poster</span> en 5 jours.</h1>
-        <p class="lede">On imagine et on crée vos visuels pour les réseaux sociaux, vos vidéos courtes et vos pages promo. Vous recevez des fichiers prêts à publier, vous gardez la main sur vos comptes.</p>
+        <span class="eyebrow">Vidéos et visuels publicitaires</span>
+        <h1>Envoyez vos photos, <span class="hl">on en fait une pub.</span></h1>
+        <p class="lede">Vidéos courtes et visuels pour vos réseaux sociaux, créés à partir de vos produits. Vous recevez des fichiers prêts à publier, en 5 jours.</p>
         <div class="hero-actions">
-          <a class="btn btn-sun" href="#contact">Demander mon devis gratuit <span class="arr">→</span></a>
-          <a class="btn btn-line" href="#realisations">Voir nos réalisations</a>
+          <a class="btn btn-dark" href="#contact">Demander mon devis gratuit <span class="arr">→</span></a>
+          <a class="btn btn-line" href="#exemples">Voir des exemples</a>
         </div>
         <div class="reassure">
           <span>Devis gratuit sous 24 h</span>
           <span>Retouches incluses</span>
-          <span>Les visuels sont à vous</span>
+          <span>Les pubs sont à vous</span>
         </div>
       </div>
-      <div class="table" id="table" aria-label="Exemples de publicités réalisées">
-        <a class="ad ad-story" href="#realisations" data-show="story" aria-label="Voir la story">
-          <div class="s-story" data-tpl="story"></div><span class="ad-label">Story</span>
-        </a>
-        <a class="ad ad-post" href="#realisations" data-show="post" aria-label="Voir le post">
-          <div class="s-post" data-tpl="post"></div><span class="ad-label">Post</span>
-        </a>
-        <a class="ad ad-banner" href="#realisations" data-show="banner" aria-label="Voir la bannière">
-          <div class="s-banner" data-tpl="banner"></div><span class="ad-label">Bannière</span>
-        </a>
+      <div class="screen">
+        <span class="sticker">Une de nos pubs</span>
+        <video id="heroVideo" src="media/pub-recherche.mp4" poster="media/pub-recherche.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Exemple de publicité vidéo"></video>
+        <button class="sound" id="heroSound" type="button" aria-pressed="false">🔇 Activer le son</button>
       </div>
     </div>
   </section>
 
-  <div class="ia" id="ia">
+  <div class="ia">
     <div class="wrap">
       <div class="ia-num"><span id="humanPct">80</span> % humain<small>et <span id="aiPct">20</span> % d'IA, pas plus</small></div>
       <div class="ia-body">
         <div class="ia-bar" aria-hidden="true"><span class="h" id="barH"></span><span class="a" id="barA"></span></div>
         <div class="ia-legend">
-          <span><i class="dot" style="background: var(--brand)"></i><b>Fait par l'équipe :</b> l'idée, les textes, la mise en page, les retouches</span>
-          <span><i class="dot" style="background: var(--sun)"></i><b>Assisté par l'IA :</b> pistes d'accroches et déclinaisons de formats</span>
+          <span><i class="dot" style="background: var(--brand)"></i><b>Fait par l'équipe :</b> l'idée, le montage, les textes, les retouches</span>
+          <span><i class="dot" style="background: var(--lilac)"></i><b>Assisté par l'IA :</b> pistes d'accroches et déclinaisons de formats</span>
         </div>
       </div>
     </div>
   </div>
 
-  <section id="realisations">
-    <div class="wrap work">
-      <div class="work-copy">
-        <span class="eyebrow">Réalisations</span>
-        <h2>SorienkaStudio, accessoires de soin du visage</h2>
-        <p class="lede">Une campagne d'automne complète pour une marque de gua-sha et de masques : même univers sur tous les formats, une offre claire, un appel à l'action à chaque fois.</p>
-        <div class="tabs" role="tablist" aria-label="Formats réalisés">
-          <button class="tab" role="tab" type="button" data-tab="story" aria-selected="true">Story</button>
-          <button class="tab" role="tab" type="button" data-tab="post" aria-selected="false">Post carré</button>
-          <button class="tab" role="tab" type="button" data-tab="banner" aria-selected="false">Bannière</button>
-          <button class="tab" role="tab" type="button" data-tab="site" aria-selected="false">Site promo</button>
-        </div>
-        <div class="work-detail" id="workDetail" aria-live="polite"></div>
+  <section id="exemples">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Exemples de pubs</span>
+        <h2>Ce qu'on peut faire pour vous</h2>
+        <p class="lede">Quelques vidéos réalisées pour une boutique de soins du visage. Cliquez pour les regarder avec le son.</p>
       </div>
-      <div class="work-stage" id="workStage" role="tabpanel"></div>
+      <div class="reel" id="reel"></div>
+    </div>
+  </section>
+
+  <section id="methode" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Comment ça marche</span>
+        <h2>Vous avez une idée, ou pas encore</h2>
+        <p class="lede">Dans les deux cas, on part de vos photos et de ce que vous vendez.</p>
+      </div>
+      <div class="ways">
+        <div class="way way-a">
+          <span class="tag">Vous savez ce que vous voulez</span>
+          <h3>Décrivez-nous votre pub</h3>
+          <ul>
+            <li>Envoyez vos photos de produits ou de votre commerce</li>
+            <li>Dites-nous l'offre, le ton, le format</li>
+            <li>On la crée, vous validez</li>
+          </ul>
+          <a class="btn btn-ink" href="#contact" data-mode="idea">J'ai une idée <span class="arr">→</span></a>
+        </div>
+        <div class="way way-b">
+          <span class="tag">Vous préférez qu'on propose</span>
+          <h3>On vous fait des propositions</h3>
+          <ul>
+            <li>Envoyez vos photos et parlez-nous de votre activité</li>
+            <li>On vous propose deux ou trois idées de pub</li>
+            <li>Vous choisissez celle qui vous plaît</li>
+          </ul>
+          <a class="btn btn-line" href="#contact" data-mode="propose">Proposez-moi <span class="arr">→</span></a>
+        </div>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">Étape 1 · sous 24 h</span><h3>Devis gratuit</h3><p>Vous remplissez le formulaire, on vous envoie un devis détaillé. Rien à payer à ce stade.</p></div>
+        <div class="step"><span class="n">Étape 2 · jours 1 à 4</span><h3>Bon de commande et création</h3><p>Vous validez le bon de commande, on crée. Vous voyez une première version et vous demandez vos retouches.</p></div>
+        <div class="step"><span class="n">Étape 3 · jour 5</span><h3>Livraison et paiement</h3><p>Vous recevez vos fichiers prêts à publier et un lien de paiement sécurisé. Vous publiez quand vous voulez.</p></div>
+      </div>
     </div>
   </section>
 
@@ -346,22 +347,8 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
       </div>
       <div class="plans" id="plans"></div>
       <div class="custom">
-        <p><b>Besoin d'autre chose ?</b> Une affiche, un flyer, une vidéo en plus : on vous fait un devis sur mesure.</p>
+        <p><b>Besoin d'autre chose ?</b> Une affiche, un flyer, plus de vidéos : on vous fait un devis sur mesure.</p>
         <a class="btn btn-ink" href="#contact" data-plan="Sur mesure">Demander un devis</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="methode" style="padding-top: 0;">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Comment ça marche</span>
-        <h2>Simple, du devis à la livraison</h2>
-      </div>
-      <div class="steps">
-        <div class="step"><span class="n">Étape 1 · sous 24 h</span><h3>Devis gratuit</h3><p>Vous remplissez le formulaire, on vous envoie un devis détaillé. Rien à payer à ce stade.</p></div>
-        <div class="step"><span class="n">Étape 2 · jours 1 à 4</span><h3>Bon de commande et création</h3><p>Vous validez le bon de commande, on crée. Vous voyez une première version et vous demandez vos retouches.</p></div>
-        <div class="step"><span class="n">Étape 3 · jour 5</span><h3>Livraison et paiement</h3><p>Vous recevez vos fichiers prêts à publier et un lien de paiement sécurisé. Vous publiez quand vous voulez.</p></div>
       </div>
     </div>
   </section>
@@ -370,10 +357,10 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="wrap contact">
       <div class="contact-copy">
         <span class="eyebrow">Devis gratuit</span>
-        <h2>Parlez-nous de votre projet</h2>
+        <h2>Parlez-nous de votre pub</h2>
         <p class="lede">Deux minutes pour remplir, une réponse sous 24 heures ouvrées. Sans engagement.</p>
         <div class="promise">
-          <div><i>1</i><span>Vous décrivez votre offre et vos réseaux</span></div>
+          <div><i>1</i><span>Vous envoyez vos photos et votre idée, ou on vous en propose</span></div>
           <div><i>2</i><span>On vous envoie un devis clair, sans surprise</span></div>
           <div><i>3</i><span>Vous validez, on lance la création</span></div>
         </div>
@@ -382,12 +369,28 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
         <fieldset class="fieldset">
           <legend>Ce qu'il vous faut</legend>
           <div class="pick" id="pickNeed" role="group">
-            <button type="button" data-v="Visuels réseaux sociaux" aria-pressed="true">Visuels réseaux sociaux</button>
-            <button type="button" data-v="Vidéo courte" aria-pressed="false">Vidéo courte</button>
-            <button type="button" data-v="Site promo" aria-pressed="false">Site promo</button>
+            <button type="button" data-v="Vidéo courte" aria-pressed="true">Vidéo courte</button>
+            <button type="button" data-v="Visuels réseaux sociaux" aria-pressed="false">Visuels réseaux sociaux</button>
             <button type="button" data-v="Affiche ou flyer" aria-pressed="false">Affiche ou flyer</button>
           </div>
         </fieldset>
+        <fieldset class="fieldset">
+          <legend>Votre idée</legend>
+          <div class="mode" id="pickMode" role="group">
+            <button type="button" data-v="idea" aria-pressed="true"><b>J'ai une idée</b><small>Je décris la pub que je veux</small></button>
+            <button type="button" data-v="propose" aria-pressed="false"><b>Proposez-moi</b><small>Je veux des idées de votre part</small></button>
+          </div>
+        </fieldset>
+        <div>
+          <span class="lbl">Vos photos</span>
+          <label class="drop" id="drop">
+            <input id="cFiles" type="file" accept="image/*,video/*" multiple>
+            <b>Glissez vos photos ici ou cliquez pour les choisir</b>
+            <small>Produits, boutique, logo : tout ce qui peut servir</small>
+          </label>
+          <div class="thumbs" id="thumbs"></div>
+        </div>
+        <label class="f"><span id="msgLabel">Décrivez la pub que vous voulez</span><textarea id="cMsg" placeholder="L'offre à mettre en avant, le ton, pour quand, sur quel réseau..."></textarea></label>
         <fieldset class="fieldset">
           <legend>Offre qui vous intéresse</legend>
           <div class="pick" id="pickPlan" role="group"></div>
@@ -400,8 +403,7 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
           <label class="f"><span>E-mail</span><input id="cEmail" type="email" autocomplete="email" required></label>
           <label class="f"><span>Téléphone (facultatif)</span><input id="cPhone" type="tel" autocomplete="tel"></label>
         </div>
-        <label class="f"><span>Votre projet</span><textarea id="cMsg" placeholder="Ce que vous vendez, l'offre à mettre en avant, pour quand..."></textarea></label>
-        <button class="btn btn-sun" type="submit">Recevoir mon devis gratuit <span class="arr">→</span></button>
+        <button class="btn btn-brand" type="submit">Recevoir mon devis gratuit <span class="arr">→</span></button>
         <p class="form-msg" id="formMsg" aria-live="polite"></p>
         <div id="summaryBox" hidden style="display:grid; gap:10px;">
           <pre class="summary" id="summary"></pre>
@@ -415,11 +417,12 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
     <div class="wrap">
       <div class="section-head"><span class="eyebrow">Questions</span><h2>Vous vous demandez sûrement</h2></div>
       <div class="faq">
-        <details open><summary>Vous utilisez l'IA ?</summary><p>Un peu, et on le dit : environ 20 % du travail. Elle nous aide à explorer des pistes d'accroches et à décliner un visuel dans plusieurs formats. L'idée, les textes, la mise en page et chaque retouche sont faits par l'équipe, et rien ne part sans avoir été relu.</p></details>
+        <details open><summary>Quelles photos dois-je envoyer ?</summary><p>Vos produits, votre boutique, votre logo, même prises au téléphone. Plus vous en envoyez, plus on a de matière. Si une photo ne convient pas, on vous le dit tout de suite.</p></details>
+        <details><summary>Je ne sais pas quelle pub faire, vous pouvez m'aider ?</summary><p>Oui. Choisissez « Proposez-moi » dans le formulaire, parlez-nous de votre activité, et on vous propose deux ou trois idées avant de commencer.</p></details>
+        <details><summary>Vous utilisez l'IA ?</summary><p>Un peu, et on le dit : environ 20 % du travail. Elle nous aide à explorer des pistes d'accroches et à décliner une pub dans plusieurs formats. L'idée, le montage, les textes et chaque retouche sont faits par l'équipe, et rien ne part sans avoir été relu.</p></details>
         <details><summary>Est-ce que vous publiez les pubs pour moi ?</summary><p>Non. On crée vos pubs et on vous livre des fichiers prêts à publier, avec les textes d'accompagnement. Vous gardez la main sur vos réseaux et vous publiez quand vous voulez.</p></details>
         <details><summary>Comment se passe le paiement ?</summary><p>On commence par un devis gratuit. Si vous l'acceptez, on vous envoie un bon de commande à valider. À la livraison, vous recevez un lien de paiement sécurisé.</p></details>
-        <details><summary>À qui appartiennent les visuels ?</summary><p>À vous. Une fois la commande réglée, les visuels vous appartiennent et vous pouvez les utiliser sur tous vos supports, sans limite.</p></details>
-        <details><summary>Et si le résultat ne me plaît pas ?</summary><p>Deux tours de retouches sont inclus dans chaque offre. On ajuste jusqu'à ce que la pub vous ressemble.</p></details>
+        <details><summary>À qui appartiennent les pubs ?</summary><p>À vous. Une fois la commande réglée, les vidéos et visuels vous appartiennent et vous pouvez les utiliser sur tous vos supports, sans limite.</p></details>
       </div>
     </div>
   </section>
@@ -427,26 +430,31 @@ footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-betwe
 
 <footer class="site">
   <div class="wrap">
-    <span>© 2026 Atelier Réclame · Création publicitaire</span>
+    <span>© 2026 Vif Visuel · Vidéos et visuels publicitaires</span>
     <a href="#contact" style="color: var(--ink);">Demander un devis</a>
   </div>
 </footer>
 
-<div class="mobile-cta" id="mobileCta"><a class="btn btn-sun" href="#contact">Devis gratuit en 2 minutes <span class="arr">→</span></a></div>
+<div class="mobile-cta" id="mobileCta"><a class="btn btn-brand" href="#contact">Devis gratuit en 2 minutes <span class="arr">→</span></a></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* ===== Réglages : à adapter ===== */
 const CONFIG = {
   aiShare: 20,        // part du travail assistée par l'IA, en %
-  // Adresse qui reçoit les demandes (ex. un formulaire Formspree : "https://formspree.io/f/xxxx").
+  // Adresse qui reçoit les demandes et les photos (ex. un formulaire Formspree : "https://formspree.io/f/xxxx").
   // Laissée vide, le formulaire affiche la demande à copier au lieu de l'envoyer.
   formEndpoint: ""
 };
 const PLANS = [
   { name: "Essentiel", price: 99, desc: "Pour se montrer sur les réseaux.", list: ["3 visuels réseaux sociaux", "Formats post et story", "Textes de publication"] },
   { name: "Visibilité", price: 249, star: true, desc: "Pour une offre ou un temps fort.", list: ["6 visuels réseaux sociaux", "1 vidéo courte de 15 à 30 s", "Formats post, story et bannière", "Textes de publication"] },
-  { name: "Lancement", price: 490, desc: "Pour une nouveauté qui fait parler.", list: ["1 site promo interactif", "4 visuels réseaux sociaux", "Mise en ligne de la page", "Textes de publication"] }
+  { name: "Campagne", price: 490, desc: "Pour un lancement qui fait parler.", list: ["3 vidéos courtes de 15 à 30 s", "6 visuels réseaux sociaux", "Tous les formats, du 9:16 au 16:9", "Textes de publication"] }
+];
+const CLIPS = [
+  { src: "media/pub-boutique.mp4", poster: "media/pub-boutique.jpg", title: "Pub produits", desc: "Les produits phares, les promos et la boutique en ligne", len: "28 s · 16:9" },
+  { src: "media/pub-recherche.mp4", poster: "media/pub-recherche.jpg", title: "Pub « recherche »", desc: "De la recherche Google jusqu'à l'ajout au panier", len: "25 s · 16:9" },
+  { src: "media/pub-france.mp4", poster: "media/pub-france.jpg", title: "Pub de marque", desc: "Livraison en France, les pubs de la boutique, la signature", len: "34 s · 16:9" }
 ];
 
 const $ = s => document.querySelector(s);
@@ -459,69 +467,31 @@ $("#humanPct").textContent = 100 - CONFIG.aiShare;
 $("#barH").style.width = (100 - CONFIG.aiShare) + "%";
 $("#barA").style.width = CONFIG.aiShare + "%";
 
-/* ===== Illustrations SorienkaStudio ===== */
-let artId = 0;
-function art(key, color) {
-  const g = "g" + (++artId);
-  const shade = `<defs><radialGradient id="${g}" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></radialGradient></defs>`;
-  if (key === "guasha") return `<svg viewBox="0 0 200 200" aria-hidden="true">${shade}
-    <path d="M100 26 C150 26 182 64 172 106 C164 140 134 146 122 168 Q100 182 78 168 C66 146 36 140 28 106 C18 64 50 26 100 26 Z" fill="${color}"/>
-    <path d="M100 26 C150 26 182 64 172 106 C164 140 134 146 122 168 Q100 182 78 168 C66 146 36 140 28 106 C18 64 50 26 100 26 Z" fill="url(#${g})"/>
-    <g transform="rotate(32 150 150)"><rect x="141" y="96" width="18" height="70" rx="9" fill="${color}"/><rect x="141" y="96" width="18" height="70" rx="9" fill="url(#${g})"/><rect x="148" y="166" width="4" height="22" fill="#B9AFC0"/><rect x="138" y="186" width="24" height="10" rx="5" fill="${color}"/></g></svg>`;
-  if (key === "sculpt") return `<svg viewBox="0 0 200 200" aria-hidden="true">${shade}
-    <path d="M100 96 L68 52 M100 96 L132 52" stroke="#B9AFC0" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="64" cy="46" r="24" fill="${color}"/><circle cx="64" cy="46" r="24" fill="url(#${g})"/>
-    <circle cx="136" cy="46" r="24" fill="${color}"/><circle cx="136" cy="46" r="24" fill="url(#${g})"/>
-    <rect x="84" y="90" width="32" height="96" rx="16" fill="${color}"/><rect x="84" y="90" width="32" height="96" rx="16" fill="url(#${g})"/></svg>`;
-  return `<svg viewBox="0 0 200 200" aria-hidden="true">${shade}
-    <rect x="44" y="30" width="112" height="146" rx="14" fill="${color}"/><rect x="44" y="30" width="112" height="146" rx="14" fill="url(#${g})"/>
-    <ellipse cx="100" cy="104" rx="30" ry="38" fill="#fff" fill-opacity=".7"/>
-    <circle cx="89" cy="96" r="4" fill="#C98E97"/><circle cx="111" cy="96" r="4" fill="#C98E97"/><path d="M92 118 q8 5 16 0" stroke="#C98E97" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <text x="100" y="160" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="2" fill="#2A1F2D" fill-opacity=".7">COLLAGÈNE</text></svg>`;
+/* ===== Vidéo du héros ===== */
+const hv = $("#heroVideo");
+if (matchMedia("(prefers-reduced-motion: reduce)").matches) { hv.removeAttribute("autoplay"); hv.pause(); }
+function setHeroSound(on) {
+  hv.muted = !on; if (on) hv.play().catch(() => {});
+  $("#heroSound").textContent = on ? "🔊 Couper le son" : "🔇 Activer le son";
+  $("#heroSound").setAttribute("aria-pressed", String(on));
 }
-const TPL = {
-  story: () => `<span class="s-brand">Sorienka Studio</span><div class="s-art">${art("guasha", "#FFFFFF")}</div>
-    <div style="display:grid; gap:8px;"><span class="s-pill">-15 % · AUTOMNE15</span><div class="s-title">Cinq minutes, <i>un visage</i> détendu.</div><span class="s-cta">Je découvre</span></div>`,
-  post: () => `<div class="top">${art("mask", "#F1DCD9")}</div>
-    <div class="bottom"><div><div class="big">Dès 3,70 € le masque</div><small>MASQUE COLLAGÈNE · PACK DE 10</small></div><span class="s-cta" style="background:#E8B4BB; color:#2A1F2D;">J'en profite</span></div>`,
-  banner: () => `<div><span class="k">Dernières pièces</span><div class="t">Le Sculpteur de Visage, <b>l'outil star</b> de ton rituel.</div></div>${art("sculpt", "#2E2B31").replace("<svg", '<svg style="filter: drop-shadow(0 0 1px #F4F2F6)"')}`
-};
-document.querySelectorAll("[data-tpl]").forEach(el => el.innerHTML = TPL[el.dataset.tpl]());
+$("#heroSound").addEventListener("click", () => {
+  if (hv.muted) document.querySelectorAll("#reel video").forEach(v => v.pause());
+  setHeroSound(hv.muted);
+});
 
-/* ===== Réalisations ===== */
-const WORK = {
-  story: { title: "Story Instagram de lancement", list: ["Format 9:16 pensé pour le pouce, lisible en deux secondes", "Le code promo mis en avant dès le premier regard", "Un bouton d'action clair pour aller sur la boutique"],
-    stage: () => `<div class="ws-story"><div class="s-story">${TPL.story()}</div></div>` },
-  post: { title: "Post carré produit", list: ["Le prix par masque mis en avant plutôt que le prix du pack", "Le même univers de couleurs que la boutique", "Décliné en story et en bannière sans tout refaire"],
-    stage: () => `<div class="ws-post"><div class="s-post">${TPL.post()}</div></div>` },
-  banner: { title: "Bannière web 16:9", list: ["Une accroche courte qui joue sur la rareté", "Fond sombre pour sortir du lot dans un fil clair", "Adaptée aux sites partenaires et aux newsletters"],
-    stage: () => `<div class="ws-banner"><div class="s-banner">${TPL.banner()}</div></div>` },
-  site: { title: "Site promo interactif", list: ["Compte à rebours et code promo copiable en un clic", "Choix de la teinte, quiz et roue des offres", "Panier relié directement à la boutique en ligne"],
-    stage: () => `<div class="browser"><div class="chrome"><i></i><i></i><i></i><span>sorienkastudio.myshopify.com</span></div>
-      <div class="bar">OFFRE D'AUTOMNE : -15 % SUR TOUT LE SITE · 20J 11H 55M</div>
-      <div class="body"><div><h4>Cinq minutes, <i>un visage</i> détendu.</h4><div class="sw"><i style="background:#E8B4BB"></i><i style="background:#F3F0EC; box-shadow:0 0 0 1px #D7D0DC"></i><i style="background:#2E2B31"></i><i style="background:#6FA58C"></i></div></div>
-      <div class="orb">${art("guasha", "#E8B4BB")}</div></div>
-      <div class="cards"><div>${art("guasha", "#6FA58C")}</div><div>${art("sculpt", "#2E2B31")}</div><div>${art("mask", "#F1DCD9")}</div></div></div>` }
-};
-function showWork(key) {
-  const w = WORK[key];
-  document.querySelectorAll("[data-tab]").forEach(t => t.setAttribute("aria-selected", t.dataset.tab === key));
-  $("#workDetail").innerHTML = `<h3>${w.title}</h3><ul>${w.list.map(l => `<li>${l}</li>`).join("")}</ul>`;
-  $("#workStage").innerHTML = `<div>${w.stage()}</div>`;
-}
-document.querySelector(".tabs").addEventListener("click", e => { const t = e.target.closest("[data-tab]"); if (t) showWork(t.dataset.tab); });
-document.querySelectorAll("[data-show]").forEach(a => a.addEventListener("click", () => showWork(a.dataset.show)));
-showWork("story");
-
-/* Les pubs du héros suivent la souris */
-const table = $("#table");
-if (matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
-  table.addEventListener("mousemove", e => {
-    const r = table.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-    table.querySelectorAll(".ad").forEach((ad, i) => { const k = (i + 1) * 8; ad.style.setProperty("--px", (x * k) + "px"); ad.style.setProperty("--py", (y * k) + "px"); });
-  });
-  table.addEventListener("mouseleave", () => table.querySelectorAll(".ad").forEach(ad => { ad.style.setProperty("--px", "0px"); ad.style.setProperty("--py", "0px"); }));
-}
+/* ===== Exemples ===== */
+$("#reel").innerHTML = CLIPS.map((c, i) => `<article class="clip">
+  <div class="clip-frame"><video src="${c.src}" poster="${c.poster}" preload="none" playsinline id="clip${i}" aria-label="${c.title}"></video>
+  <button class="play" type="button" data-play="${i}" aria-label="Lire ${c.title}"><span></span></button></div>
+  <div><b>${c.title}</b> <span class="len">${c.len}</span><small>${c.desc}</small></div></article>`).join("");
+$("#reel").addEventListener("click", e => {
+  const b = e.target.closest("[data-play]"); if (!b) return;
+  document.querySelectorAll("#reel video").forEach(v => { v.pause(); v.controls = false; });
+  document.querySelectorAll("#reel .play").forEach(p => p.hidden = false);
+  setHeroSound(false);
+  const v = $("#clip" + b.dataset.play); b.hidden = true; v.controls = true; v.muted = false; v.play().catch(() => {});
+});
 
 /* ===== Offres ===== */
 let chosenPlan = "Visibilité";
@@ -530,18 +500,46 @@ $("#plans").innerHTML = PLANS.map(p => `<article class="plan${p.star ? " star" :
   <h3>${p.name}</h3><p class="muted">${p.desc}</p>
   <ul>${p.list.map(l => `<li>${l}</li>`).join("")}</ul>
   <div style="display:grid; gap:14px;"><div class="price">${p.price} € <small>HT</small></div>
-  <a class="btn ${p.star ? "btn-sun" : "btn-ink"}" href="#contact" data-plan="${p.name}">Choisir ${p.name} <span class="arr">→</span></a></div></article>`).join("");
+  <a class="btn ${p.star ? "btn-brand" : "btn-ink"}" href="#contact" data-plan="${p.name}">Choisir ${p.name} <span class="arr">→</span></a></div></article>`).join("");
 const planOptions = [...PLANS.map(p => p.name), "Sur mesure", "Je ne sais pas encore"];
 function renderPlanPick() {
-  $("#pickPlan").innerHTML = planOptions.map(n => `<button type="button" data-v="${n}" aria-pressed="${n === chosenPlan}">${n}${PLANS.find(p => p.name === n) ? " · " + PLANS.find(p => p.name === n).price + " €" : ""}</button>`).join("");
+  $("#pickPlan").innerHTML = planOptions.map(n => { const p = PLANS.find(p => p.name === n);
+    return `<button type="button" data-v="${n}" aria-pressed="${n === chosenPlan}">${n}${p ? " · " + p.price + " €" : ""}</button>`; }).join("");
 }
 renderPlanPick();
+
+/* ===== Choix dans le formulaire ===== */
+let mode = "idea";
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll("#pickMode [data-v]").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === m));
+  $("#msgLabel").textContent = m === "idea" ? "Décrivez la pub que vous voulez" : "Parlez-nous de votre activité";
+  $("#cMsg").placeholder = m === "idea" ? "L'offre à mettre en avant, le ton, pour quand, sur quel réseau..." : "Ce que vous vendez, à qui, ce qui vous rend différent...";
+}
 document.addEventListener("click", e => {
-  const a = e.target.closest("[data-plan]"); if (!a) return;
-  chosenPlan = a.dataset.plan; renderPlanPick(); toast("Offre " + chosenPlan + " sélectionnée");
+  const a = e.target.closest("[data-plan]"); if (a) { chosenPlan = a.dataset.plan; renderPlanPick(); toast("Offre " + chosenPlan + " sélectionnée"); }
+  const m = e.target.closest("[data-mode]"); if (m) setMode(m.dataset.mode);
 });
+$("#pickMode").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) setMode(b.dataset.v); });
 $("#pickPlan").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (!b) return; chosenPlan = b.dataset.v; renderPlanPick(); });
-$("#pickNeed").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (!b) return; b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); });
+$("#pickNeed").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); });
+
+/* ===== Photos ===== */
+let files = [];
+function renderThumbs() {
+  $("#thumbs").innerHTML = files.map((f, i) => `<figure>${f.type.startsWith("image/") ? `<img src="${f.url}" alt="${f.file.name}">` : `<span style="display:grid;place-items:center;height:100%;font-size:.7rem;">vidéo</span>`}<button type="button" data-rm="${i}" aria-label="Retirer ${f.file.name}">×</button></figure>`).join("");
+}
+function addFiles(list) {
+  let added = 0;
+  for (const file of list) { if (!/^(image|video)\//.test(file.type) || files.length >= 20) continue; files.push({ file, type: file.type, url: URL.createObjectURL(file) }); added++; }
+  renderThumbs(); if (added) toast(files.length + " fichier" + (files.length > 1 ? "s" : "") + " prêt" + (files.length > 1 ? "s" : ""));
+}
+$("#cFiles").addEventListener("change", e => { addFiles(e.target.files); e.target.value = ""; });
+const drop = $("#drop");
+["dragenter", "dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+["dragleave", "drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+drop.addEventListener("drop", e => addFiles(e.dataTransfer.files));
+$("#thumbs").addEventListener("click", e => { const b = e.target.closest("[data-rm]"); if (!b) return; URL.revokeObjectURL(files[+b.dataset.rm].url); files.splice(+b.dataset.rm, 1); renderThumbs(); });
 
 /* ===== En-tête et bouton mobile ===== */
 function onScroll() {
@@ -552,14 +550,16 @@ function onScroll() {
 }
 addEventListener("scroll", onScroll, { passive: true }); onScroll();
 
-/* ===== Formulaire ===== */
+/* ===== Envoi ===== */
 function buildSummary() {
   const needs = [...document.querySelectorAll('#pickNeed [aria-pressed="true"]')].map(b => b.dataset.v);
-  return "Demande de devis · Atelier Réclame\n\n" +
+  return "Demande de devis · Vif Visuel\n\n" +
     "Nom : " + $("#cName").value.trim() + "\nEntreprise : " + ($("#cCompany").value.trim() || "-") +
     "\nE-mail : " + $("#cEmail").value.trim() + "\nTéléphone : " + ($("#cPhone").value.trim() || "-") +
     "\n\nBesoin : " + (needs.join(", ") || "-") + "\nOffre : " + chosenPlan +
-    "\n\nProjet :\n" + ($("#cMsg").value.trim() || "-");
+    "\nIdée : " + (mode === "idea" ? "j'ai une idée" : "proposez-moi des idées") +
+    "\nPhotos : " + (files.length ? files.length + " fichier(s) : " + files.map(f => f.file.name).join(", ") : "aucune pour l'instant") +
+    "\n\n" + (mode === "idea" ? "La pub souhaitée" : "Mon activité") + " :\n" + ($("#cMsg").value.trim() || "-");
 }
 $("#brief").addEventListener("submit", async e => {
   e.preventDefault();
@@ -570,12 +570,15 @@ $("#brief").addEventListener("submit", async e => {
   const summary = buildSummary();
   if (CONFIG.formEndpoint) {
     try {
-      const r = await fetch(CONFIG.formEndpoint, { method: "POST", headers: { "Accept": "application/json", "Content-Type": "application/json" }, body: JSON.stringify({ email: $("#cEmail").value.trim(), message: summary }) });
+      const fd = new FormData();
+      fd.append("email", $("#cEmail").value.trim()); fd.append("message", summary);
+      files.forEach(f => fd.append("photos", f.file, f.file.name));
+      const r = await fetch(CONFIG.formEndpoint, { method: "POST", headers: { "Accept": "application/json" }, body: fd });
       if (!r.ok) throw new Error(r.status);
-      msg.className = "form-msg ok"; msg.textContent = "Demande envoyée. Vous recevez votre devis sous 24 heures ouvrées."; $("#brief").reset(); return;
-    } catch (err) { msg.className = "form-msg err"; msg.textContent = "L'envoi n'a pas abouti. Copiez votre demande ci-dessous et envoyez-la par e-mail."; }
+      msg.className = "form-msg ok"; msg.textContent = "Demande envoyée. Vous recevez votre devis sous 24 heures ouvrées."; return;
+    } catch (err) { msg.className = "form-msg err"; msg.textContent = "L'envoi n'a pas abouti. Copiez votre demande ci-dessous et envoyez-la par e-mail avec vos photos."; }
   } else {
-    msg.className = "form-msg ok"; msg.textContent = "Votre demande est prête. Copiez-la et envoyez-la par e-mail.";
+    msg.className = "form-msg ok"; msg.textContent = "Votre demande est prête. Copiez-la et envoyez-la par e-mail avec vos photos.";
   }
   $("#summary").textContent = summary; $("#summaryBox").hidden = false;
 });
