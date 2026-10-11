@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sorienka Studio</title>
+<meta name="description" content="Gua-sha, sculpteur et masques collagène : ton rituel massage du visage en cinq minutes, à la maison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : une page-rituel. Bandeau promo, héros pierre interactive, boutique, quiz, rituel minuté, roue des offres, panier latéral. */
+:root {
+  --bg: #F4F2F6;        /* quartz pâle, légèrement lilas */
+  --surface: #FFFFFF;
+  --stone: #E4DFE8;     /* pierre lissée */
+  --ink: #2A1F2D;       /* prune presque noire */
+  --muted: #6D6372;
+  --jade: #2F6F5C;      /* accent : jade */
+  --jade-soft: #D6E8E0;
+  --rose: #E8B9BF;      /* quartz rose */
+  --line: #D7D0DC;
+  --warn: #A1452F;
+  --on-jade: #FFFFFF;
+  --shadow: 0 18px 40px -24px rgba(42, 31, 45, .45);
+  --f-display: "Italiana", "Didot", "Bodoni 72", Georgia, serif;
+  --f-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 14px;
+  --gutter: clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17131B; --surface: #221C27; --stone: #2E2634; --ink: #F1ECF3; --muted: #B3A8B8;
+    --jade: #86CBB4; --jade-soft: #22362F; --rose: #C98E97; --line: #3A3141; --warn: #F0A08C;
+    --on-jade: #10241D; --shadow: 0 18px 40px -24px rgba(0,0,0,.8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17131B; --surface: #221C27; --stone: #2E2634; --ink: #F1ECF3; --muted: #B3A8B8;
+  --jade: #86CBB4; --jade-soft: #22362F; --rose: #C98E97; --line: #3A3141; --warn: #F0A08C;
+  --on-jade: #10241D; --shadow: 0 18px 40px -24px rgba(0,0,0,.8);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--f-body); -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--jade); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; line-height: 1.05; text-wrap: balance; margin: 0; letter-spacing: .005em; }
+h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+h3 { font-size: 1.7rem; }
+p { margin: 0; }
+.wrap { max-width: 1160px; margin-inline: auto; padding-inline: var(--gutter); }
+.eyebrow { font: 500 .75rem/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--jade); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.lede { color: var(--muted); max-width: 58ch; font-size: 1.05rem; }
+section { padding-block: clamp(56px, 9vw, 110px); }
+.section-head { display: grid; gap: 14px; margin-bottom: 40px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid transparent; border-radius: 999px; padding: 12px 22px; font-weight: 600; text-decoration: none; transition: transform .15s ease, background .2s ease, color .2s ease; }
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--jade); color: var(--on-jade); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* Bandeau promo */
+.promo-bar { background: var(--ink); color: var(--bg); font-size: .9rem; }
+.promo-bar .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; justify-content: center; padding-block: 9px; text-align: center; }
+.promo-bar strong { font-weight: 600; }
+.countdown { display: inline-flex; gap: 6px; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.countdown span { background: color-mix(in srgb, var(--bg) 14%, transparent); padding: 2px 7px; border-radius: 6px; }
+.code-chip { border: 1px dashed currentColor; background: transparent; border-radius: 6px; padding: 3px 10px; font-family: var(--f-mono); letter-spacing: .08em; color: inherit; }
+.code-chip:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+
+/* En-tête */
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.logo { font-family: var(--f-display); font-size: 1.6rem; text-decoration: none; color: var(--ink); letter-spacing: .04em; white-space: nowrap; }
+.logo em { font-style: normal; color: var(--jade); }
+nav.main { display: flex; gap: 22px; }
+nav.main a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: .95rem; }
+nav.main a:hover { color: var(--ink); }
+.cart-btn { position: relative; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 16px; font-weight: 600; }
+.cart-count { min-width: 22px; height: 22px; border-radius: 999px; background: var(--jade); color: var(--on-jade); font: 500 .78rem/22px var(--f-mono); text-align: center; padding-inline: 6px; }
+.cart-btn.bump { animation: bump .4s ease; }
+@keyframes bump { 40% { transform: scale(1.12); } }
+@media (max-width: 760px) { nav.main { display: none; } }
+
+/* Héros */
+.hero { padding-block: clamp(40px, 7vw, 90px) clamp(48px, 7vw, 80px); }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero h1 { font-size: clamp(3rem, 8.4vw, 6.6rem); }
+.hero h1 i { font-style: normal; color: var(--jade); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-stage { position: relative; aspect-ratio: 1 / 1; max-width: 100%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--surface), var(--stone) 70%); display: grid; place-items: center; box-shadow: var(--shadow); }
+.hero-stage svg { width: 74%; height: auto; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.hero-stage:hover svg { transform: rotate(-8deg) scale(1.03); }
+.stage-label { position: absolute; bottom: 7%; left: 50%; transform: translateX(-50%); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font: 500 .8rem var(--f-mono); white-space: nowrap; }
+.swatches { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.swatch { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--line); background: var(--c); transition: box-shadow .2s, transform .2s; }
+.swatch:hover { transform: translateY(-2px); }
+.swatch[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--jade); }
+.swatch-meta { font-size: .9rem; color: var(--muted); }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 6px; border-top: 1px solid var(--line); }
+.hero-facts div { display: grid; }
+.hero-facts b { font: 500 1.25rem var(--f-mono); }
+.hero-facts span { color: var(--muted); font-size: .85rem; }
+@media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } .hero-stage { width: min(420px, 100%); margin-inline: auto; } }
+
+/* Boutique */
+.shop-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 960px) { .shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .shop-grid { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.card-media { position: relative; aspect-ratio: 4 / 3; background: var(--stone); display: grid; place-items: center; overflow: hidden; }
+.card-media svg { width: 58%; height: auto; transition: transform .5s ease; }
+.card-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card:hover .card-media svg { transform: scale(1.06) rotate(-4deg); }
+.badge { position: absolute; top: 12px; left: 12px; z-index: 2; background: var(--ink); color: var(--bg); font: 500 .72rem var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; }
+.card-body { padding: 20px; display: grid; gap: 14px; flex: 1; align-content: start; }
+.card-type { font: 500 .72rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.card p.desc { color: var(--muted); font-size: .95rem; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 6px 13px; font-size: .88rem; display: inline-flex; align-items: center; gap: 7px; }
+.opt i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 1px var(--line); }
+.opt[aria-pressed="true"] { border-color: var(--jade); background: var(--jade-soft); }
+.opt.soldout { text-decoration: line-through; color: var(--muted); }
+.price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.price { font: 500 1.5rem var(--f-mono); font-variant-numeric: tabular-nums; }
+.price s { font-size: .95rem; color: var(--muted); margin-left: 6px; }
+.unit { font: 400 .82rem var(--f-mono); color: var(--jade); }
+.stock { font-size: .85rem; display: flex; align-items: center; gap: 7px; }
+.stock::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--jade); }
+.stock.low::before { background: #D98A3D; }
+.stock.out { color: var(--warn); }
+.stock.out::before { background: var(--warn); }
+.card-foot { padding: 0 20px 20px; }
+.card-foot .btn { width: 100%; }
+
+/* Quiz */
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: calc(var(--r) * 1.6); padding: clamp(22px, 4vw, 44px); display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(24px, 4vw, 56px); }
+@media (max-width: 860px) { .quiz { grid-template-columns: 1fr; } }
+.quiz-intro { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.quiz-steps { display: flex; gap: 6px; }
+.quiz-steps span { flex: 1; height: 4px; border-radius: 4px; background: var(--stone); transition: background .3s; }
+.quiz-steps span.on { background: var(--jade); }
+.quiz-panel { display: grid; gap: 16px; min-width: 0; }
+.quiz-q { font-family: var(--f-display); font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
+.answers { display: grid; gap: 10px; }
+.answer { text-align: left; border: 1px solid var(--line); background: var(--bg); border-radius: 12px; padding: 14px 18px; display: grid; gap: 2px; transition: border-color .2s, transform .15s; }
+.answer:hover { border-color: var(--jade); transform: translateX(4px); }
+.answer b { font-weight: 600; }
+.answer span { color: var(--muted); font-size: .9rem; }
+.result { display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: center; }
+.result-art { aspect-ratio: 1; max-width: 100%; border-radius: 50%; background: var(--stone); display: grid; place-items: center; }
+.result-art svg { width: 66%; }
+.result ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); }
+@media (max-width: 480px) { .result { grid-template-columns: 1fr; } .result-art { width: 120px; } }
+
+/* Rituel minuté */
+.ritual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
+@media (max-width: 860px) { .ritual-grid { grid-template-columns: 1fr; } }
+.face-wrap { position: relative; max-width: 440px; width: 100%; margin-inline: auto; aspect-ratio: 1; }
+.face-wrap svg { width: 100%; height: 100%; }
+.zone { fill: none; stroke: var(--line); stroke-width: 5; stroke-linecap: round; transition: stroke .3s; }
+.zone.active { stroke: var(--jade); stroke-dasharray: 10 12; animation: flow 1.2s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -44; } }
+.ring-bg { fill: none; stroke: var(--stone); stroke-width: 6; }
+.ring { fill: none; stroke: var(--jade); stroke-width: 6; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; transition: stroke-dashoffset .25s linear; }
+.ritual-panel { display: grid; gap: 18px; min-width: 0; }
+.step-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.step-list li { display: grid; grid-template-columns: 32px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; border: 1px solid transparent; color: var(--muted); transition: background .3s, color .3s; }
+.step-list li .n { font: 500 .85rem var(--f-mono); width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); }
+.step-list li.active { background: var(--surface); border-color: var(--line); color: var(--ink); }
+.step-list li.active .n { background: var(--jade); color: var(--on-jade); border-color: var(--jade); }
+.step-list li.done .n { background: var(--jade-soft); border-color: var(--jade-soft); }
+.step-list li b { display: block; color: var(--ink); font-weight: 600; }
+.step-list li small { font-size: .88rem; }
+.timer-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.timer { font: 500 2.4rem var(--f-mono); font-variant-numeric: tabular-nums; min-width: 4.5ch; }
+
+/* Roue des offres */
+.wheel-section { background: var(--ink); color: var(--bg); }
+.wheel-section .lede { color: color-mix(in srgb, var(--bg) 72%, var(--ink)); }
+.wheel-section .eyebrow { color: var(--rose); }
+.wheel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
+@media (max-width: 860px) { .wheel-grid { grid-template-columns: 1fr; } }
+.wheel-box { position: relative; width: min(420px, 100%); aspect-ratio: 1; margin-inline: auto; }
+.wheel-box canvas { width: 100%; height: 100%; display: block; }
+.pointer { position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 26px solid var(--rose); filter: drop-shadow(0 3px 4px rgba(0,0,0,.4)); z-index: 2; }
+.wheel-copy { display: grid; gap: 18px; min-width: 0; }
+.prize { border: 1px dashed var(--rose); border-radius: var(--r); padding: 18px 20px; display: grid; gap: 10px; }
+.prize .big { font-family: var(--f-display); font-size: 2.6rem; line-height: 1; }
+.wheel-section .btn-ghost { color: var(--bg); border-color: color-mix(in srgb, var(--bg) 35%, transparent); }
+.wheel-section .btn-primary { background: var(--rose); color: #2A1F2D; }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 820px; }
+.faq details { border-bottom: 1px solid var(--line); padding-block: 14px; }
+.faq summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--f-mono); color: var(--jade); transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { color: var(--muted); padding-top: 10px; max-width: 65ch; }
+
+footer.site { border-top: 1px solid var(--line); padding-block: 40px; color: var(--muted); font-size: .9rem; }
+footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+footer.site a { color: var(--ink); }
+
+/* Panier */
+.scrim { position: fixed; inset: 0; background: rgba(20, 14, 22, .45); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--bg); z-index: 50; transform: translateX(105%); transition: transform .35s cubic-bezier(.2,.8,.2,1); display: grid; grid-template-rows: auto auto 1fr auto; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: -20px 0 50px -30px rgba(0,0,0,.5); }
+.drawer.open { transform: none; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.drawer-head h3 { font-size: 1.8rem; }
+.icon-btn { border: 1px solid var(--line); background: transparent; width: 38px; height: 38px; border-radius: 50%; font-size: 1.1rem; line-height: 1; }
+.ship { padding: 14px 20px; border-bottom: 1px solid var(--line); display: grid; gap: 8px; font-size: .9rem; }
+.ship-bar { height: 6px; background: var(--stone); border-radius: 6px; overflow: hidden; }
+.ship-bar i { display: block; height: 100%; width: 0; background: var(--jade); transition: width .4s ease; }
+.items { overflow-y: auto; padding: 8px 20px; }
+.empty { color: var(--muted); padding: 30px 0; display: grid; gap: 12px; justify-items: start; }
+.line-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.line-art { width: 64px; height: 64px; border-radius: 12px; background: var(--stone); display: grid; place-items: center; }
+.line-art svg { width: 70%; }
+.line-item .meta { min-width: 0; }
+.line-item .meta b { display: block; font-weight: 600; font-size: .95rem; }
+.line-item .meta small { color: var(--muted); }
+.qty { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; margin-top: 6px; }
+.qty button { border: 0; background: transparent; width: 30px; height: 28px; }
+.qty span { font: 500 .85rem var(--f-mono); min-width: 22px; text-align: center; }
+.drawer-foot { padding: 18px 20px; border-top: 1px solid var(--line); display: grid; gap: 12px; }
+.code-form { display: flex; gap: 8px; }
+.code-form input { flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 10px 16px; font-family: var(--f-mono); text-transform: uppercase; letter-spacing: .06em; }
+.code-msg { font-size: .85rem; min-height: 1.2em; }
+.code-msg.ok { color: var(--jade); }
+.code-msg.err { color: var(--warn); }
+.totals { display: grid; gap: 4px; font-size: .95rem; }
+.totals div { display: flex; justify-content: space-between; }
+.totals .grand { font-size: 1.15rem; font-weight: 600; padding-top: 6px; }
+.totals .mono { font-weight: 500; }
+.fine { font-size: .78rem; color: var(--muted); }
+
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 140%); background: var(--ink); color: var(--bg); padding: 12px 20px; border-radius: 999px; z-index: 60; transition: transform .35s cubic-bezier(.2,.8,.2,1); font-weight: 500; max-width: calc(100% - 32px); text-align: center; }
+.toast.show { transform: translate(-50%, 0); }
+
+@keyframes rise { from { transform: translateY(14px); } to { transform: none; } }
+.hero-copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+.hero-copy > *:nth-child(2) { animation-delay: .06s; }
+.hero-copy > *:nth-child(3) { animation-delay: .12s; }
+.hero-copy > *:nth-child(4) { animation-delay: .18s; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="promo-bar" role="region" aria-label="Offre en cours">
+  <div class="wrap">
+    <span><strong>Offre d'automne : <span id="promoPct">-15 %</span> sur tout le site</strong></span>
+    <span class="countdown" id="countdown" aria-label="Temps restant"><span id="cdD">00j</span><span id="cdH">00h</span><span id="cdM">00m</span><span id="cdS">00s</span></span>
+    <button class="code-chip" id="promoCode" type="button" title="Copier le code">AUTOMNE15</button>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#top">Sorienka <em>Studio</em></a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#boutique">Boutique</a>
+      <a href="#quiz">Ton rituel</a>
+      <a href="#rituel">Rituel guidé</a>
+      <a href="#roue">Offres</a>
+    </nav>
+    <button class="cart-btn" id="openCart" type="button" aria-label="Ouvrir le panier">
+      Panier <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Rituel massage du visage · à la maison</span>
+        <h1>Cinq minutes, <i>un visage</i> détendu.</h1>
+        <p class="lede">Gua-sha, rouleau, sculpteur et masques collagène pour masser le visage et le cou en douceur. Choisis ta pierre, on t'apprend le geste.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="heroAdd" type="button">Ajouter le duo Rose · 17,99 €</button>
+          <a class="btn btn-ghost" href="#quiz">Trouver mon rituel</a>
+        </div>
+        <div class="swatches" role="group" aria-label="Couleur du gua-sha" id="heroSwatches"></div>
+        <div class="hero-facts">
+          <div><b>4 min 30</b><span>pour le rituel complet</span></div>
+          <div><b>4 teintes</b><span>de pierre au choix</span></div>
+          <div><b>dès 3,70 €</b><span>le masque, en pack de 10</span></div>
+        </div>
+      </div>
+      <div class="hero-stage" id="heroStage" aria-hidden="true">
+        <div id="heroArt"></div>
+        <span class="stage-label" id="heroLabel">Rose · 4 en stock</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="boutique" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">La boutique</span>
+        <h2>Trois outils, un rituel.</h2>
+        <p class="lede">Les prix affichés incluent l'offre d'automne au passage en caisse. Les stocks sont ceux de la boutique, il reste peu de pièces.</p>
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </div>
+  </section>
+
+  <section id="quiz" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="quiz">
+        <div class="quiz-intro">
+          <span class="eyebrow">Trois questions</span>
+          <h2>Quel rituel est fait pour toi ?</h2>
+          <p class="lede">Réponds en dix secondes, on te propose l'outil et le geste qui collent à ton matin, ou à ton soir.</p>
+          <div class="quiz-steps" id="quizSteps"><span></span><span></span><span></span></div>
+        </div>
+        <div class="quiz-panel" id="quizPanel" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rituel" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Rituel guidé</span>
+        <h2>Lance le minuteur, suis le geste.</h2>
+        <p class="lede">Cinq étapes, du front au cou. Toujours de l'intérieur vers l'extérieur, toujours en douceur, sur une peau huilée ou avec ton sérum.</p>
+      </div>
+      <div class="ritual-grid">
+        <div class="face-wrap">
+          <svg viewBox="0 0 400 400" role="img" aria-label="Zones du visage à masser">
+            <circle class="ring-bg" cx="200" cy="200" r="190"></circle>
+            <circle class="ring" id="ring" cx="200" cy="200" r="190"></circle>
+            <!-- visage -->
+            <ellipse cx="200" cy="175" rx="98" ry="122" fill="var(--stone)"></ellipse>
+            <path d="M160 290 Q160 320 140 345 M240 290 Q240 320 260 345" fill="none" stroke="var(--stone)" stroke-width="26" stroke-linecap="round"></path>
+            <path d="M150 160 q14 -8 28 0 M222 160 q14 -8 28 0" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"></path>
+            <path d="M200 175 l-6 30 h12" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M180 240 q20 12 40 0" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round"></path>
+            <!-- zones -->
+            <path class="zone" data-zone="0" d="M200 64 C 260 64 298 110 298 175 C 298 245 255 297 200 297 C 145 297 102 245 102 175 C 102 110 140 64 200 64" stroke-width="3"></path>
+            <path class="zone" data-zone="1" d="M196 108 Q 160 100 128 122 M204 108 Q 240 100 272 122"></path>
+            <path class="zone" data-zone="2" d="M188 200 Q 150 192 116 168 M212 200 Q 250 192 284 168"></path>
+            <path class="zone" data-zone="3" d="M196 286 Q 150 280 118 225 M204 286 Q 250 280 282 225"></path>
+            <path class="zone" data-zone="4" d="M170 300 L 160 350 M230 300 L 240 350"></path>
+          </svg>
+        </div>
+        <div class="ritual-panel">
+          <ol class="step-list" id="stepList"></ol>
+          <div class="timer-row">
+            <span class="timer" id="timer">0:30</span>
+            <button class="btn btn-primary" id="ritualPlay" type="button">Démarrer</button>
+            <button class="btn btn-ghost" id="ritualNext" type="button">Étape suivante</button>
+            <button class="btn btn-ghost" id="ritualReset" type="button">Recommencer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roue" class="wheel-section">
+    <div class="wrap wheel-grid">
+      <div class="wheel-box">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" width="840" height="840" aria-label="Roue des offres"></canvas>
+      </div>
+      <div class="wheel-copy">
+        <span class="eyebrow">La roue des offres</span>
+        <h2>Un tour, une réduction.</h2>
+        <p class="lede">Fais tourner la roue une fois. Le code gagné s'applique directement à ton panier et se cumule avec ton envie de prendre soin de toi.</p>
+        <div class="prize" id="prize" hidden>
+          <span class="eyebrow">Tu as gagné</span>
+          <span class="big" id="prizeBig">-10 %</span>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <button class="code-chip" id="prizeCode" type="button" title="Copier le code">ROUE10</button>
+            <button class="btn btn-primary" id="prizeApply" type="button">Appliquer au panier</button>
+          </div>
+        </div>
+        <div><button class="btn btn-primary" id="spin" type="button">Faire tourner la roue</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2>Avant de commencer</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>Combien de temps dure le rituel ?</summary><p>Le rituel guidé prend 4 minutes 30. Tu peux le faire le matin pour un réveil en douceur, ou le soir pour relâcher la mâchoire après la journée.</p></details>
+        <details><summary>Faut-il appliquer un produit avant le gua-sha ?</summary><p>Oui. Une huile ou un sérum permet à la pierre de glisser sans tirer la peau. Garde l'outil presque à plat, à environ 15 degrés.</p></details>
+        <details><summary>Comment nettoyer mes outils ?</summary><p>Rince-les à l'eau tiède savonneuse après chaque utilisation, puis sèche-les avec un linge doux. Range-les à l'abri des chocs.</p></details>
+        <details><summary>Le masque collagène est-il réutilisable ?</summary><p>Non, c'est un masque à usage unique. Pose-le sur une peau propre, garde-le le temps indiqué sur le sachet, puis masse le surplus de sérum avec ton rouleau.</p></details>
+        <details><summary>Comment utiliser un code promo ?</summary><p>Copie le code ou applique-le dans le panier de cette page. Il est transmis automatiquement à la caisse Shopify quand tu cliques sur « Passer commande ».</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 SorienkaStudio · Fait en France</span>
+    <span>Boutique : <a href="https://sorienkastudio.myshopify.com" target="_blank" rel="noopener">sorienkastudio.myshopify.com</a></span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Ton panier</h3>
+    <button class="icon-btn" id="closeCart" type="button" aria-label="Fermer le panier">×</button>
+  </div>
+  <div class="ship">
+    <span id="shipMsg">Plus que 35,00 € pour la livraison offerte</span>
+    <div class="ship-bar"><i id="shipBar"></i></div>
+  </div>
+  <div class="items" id="items"></div>
+  <div class="drawer-foot">
+    <form class="code-form" id="codeForm" autocomplete="off">
+      <input id="codeInput" type="text" placeholder="Code promo" aria-label="Code promo">
+      <button class="btn btn-ghost" type="submit">Appliquer</button>
+    </form>
+    <div class="code-msg" id="codeMsg"></div>
+    <div class="totals">
+      <div><span>Sous-total</span><span class="mono" id="tSub">0,00 €</span></div>
+      <div id="tDiscRow" hidden><span id="tDiscLabel">Réduction</span><span class="mono" id="tDisc">-0,00 €</span></div>
+      <div class="grand"><span>Total estimé</span><span class="mono" id="tTotal">0,00 €</span></div>
+    </div>
+    <a class="btn btn-primary" id="checkout" href="#" target="_blank" rel="noopener">Passer commande</a>
+    <p class="fine">Paiement sécurisé sur la boutique Shopify SorienkaStudio. Le total final est calculé à la caisse.</p>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== Réglages : à adapter ===== */
+const CONFIG = {
+  shop: "https://sorienkastudio.myshopify.com",
+  promoEnd: "2026-10-31T23:59:59+01:00",   // fin de l'offre d'automne
+  promoCode: "AUTOMNE15",
+  freeShipping: 35,                          // seuil de livraison offerte, en euros
+  // Codes reconnus par le panier de cette page. Ils doivent aussi exister dans Shopify > Réductions.
+  codes: { AUTOMNE15: 15, ROUE5: 5, ROUE10: 10, ROUE15: 15 }
+};
+
+/* ===== Catalogue (données Shopify) ===== */
+const PRODUCTS = [
+  {
+    key: "guasha", handle: "gua-sha-et-rouleau-visage", name: "Gua-Sha et Rouleau Visage", type: "Accessoires visage",
+    desc: "Le duo pierre pour masser visage et cou en douceur. Quelques minutes suffisent.",
+    img: "https://cdn.shopify.com/s/files/1/0959/4578/5725/files/20.png?v=1790939174",
+    badge: "Best-seller", optLabel: "Teinte",
+    variants: [
+      { id: "58801835278717", t: "Rose",  price: 17.99, stock: 4, c: "#E8B4BB" },
+      { id: "58801835311485", t: "Blanc", price: 17.99, stock: 4, c: "#F3F0EC" },
+      { id: "58801835344253", t: "Noir",  price: 17.99, stock: 4, c: "#2E2B31" },
+      { id: "58801835377021", t: "Vert",  price: 17.99, stock: 3, c: "#6FA58C" }
+    ]
+  },
+  {
+    key: "sculpt", handle: "sculpteur-de-visage", name: "Sculpteur de Visage", type: "Accessoires visage",
+    desc: "L'outil star pour masser le visage, la mâchoire et le cou. Design ergonomique, bonne prise en main.",
+    img: "https://cdn.shopify.com/s/files/1/0959/4578/5725/files/Use_AI_Image_Oct_2_2026_13_44_44.jpg?v=1790941554",
+    badge: "Dernières pièces", optLabel: "Finition",
+    variants: [
+      { id: "58801835770237", t: "Blanc", price: 49.99, stock: 0, c: "#F3F0EC" },
+      { id: "58801835803005", t: "Noir",  price: 49.99, stock: 3, c: "#2E2B31" }
+    ]
+  },
+  {
+    key: "mask", handle: "masque-collagene", name: "Masque Collagène", type: "Masques visage",
+    desc: "Un moment cocooning en quelques minutes. Masque à usage unique, facile à glisser dans ta routine.",
+    img: "https://cdn.shopify.com/s/files/1/0959/4578/5725/files/4.png?v=1790939175",
+    badge: "Jusqu'à -63 % par masque", optLabel: "Pack",
+    variants: [
+      { id: "58801835573629", t: "1 pièce",   n: 1,  price: 9.99,  stock: 5, c: "#F1DCD9" },
+      { id: "58801835606397", t: "3 pièces",  n: 3,  price: 15.99, stock: 5, c: "#F1DCD9" },
+      { id: "58801835639165", t: "5 pièces",  n: 5,  price: 19.99, stock: 5, c: "#F1DCD9" },
+      { id: "58801835671933", t: "10 pièces", n: 10, price: 36.99, stock: 5, c: "#F1DCD9" }
+    ]
+  }
+];
+
+/* ===== Utilitaires ===== */
+const $ = s => document.querySelector(s);
+const eur = n => n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("sorienka:" + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("sorienka:" + k, JSON.stringify(v)); } catch (e) {} }
+};
+const findVariant = id => { for (const p of PRODUCTS) { const v = p.variants.find(v => v.id === id); if (v) return { p, v }; } return null; };
+let toastTimer;
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2400);
+}
+function copy(text) {
+  const done = () => toast("Code " + text + " copié");
+  try { navigator.clipboard.writeText(text).then(done, () => toast("Code : " + text)); } catch (e) { toast("Code : " + text); }
+}
+
+/* ===== Illustrations des produits ===== */
+let artId = 0;
+function art(key, color) {
+  const g = "g" + (++artId);
+  const shade = `<defs><radialGradient id="${g}" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></radialGradient></defs>`;
+  if (key === "guasha") return `<svg viewBox="0 0 200 200" aria-hidden="true">${shade}
+    <path d="M100 26 C150 26 182 64 172 106 C164 140 134 146 122 168 Q100 182 78 168 C66 146 36 140 28 106 C18 64 50 26 100 26 Z" fill="${color}"/>
+    <path d="M100 26 C150 26 182 64 172 106 C164 140 134 146 122 168 Q100 182 78 168 C66 146 36 140 28 106 C18 64 50 26 100 26 Z" fill="url(#${g})"/>
+    <path d="M78 168 q11 -9 22 0 q11 -9 22 0" fill="none" stroke="#000" stroke-opacity=".18" stroke-width="2.5"/>
+    <g transform="rotate(32 150 150)"><rect x="141" y="96" width="18" height="70" rx="9" fill="${color}"/><rect x="141" y="96" width="18" height="70" rx="9" fill="url(#${g})"/><rect x="148" y="166" width="4" height="22" fill="#B9AFC0"/><rect x="138" y="186" width="24" height="10" rx="5" fill="${color}"/></g></svg>`;
+  if (key === "sculpt") return `<svg viewBox="0 0 200 200" aria-hidden="true">${shade}
+    <path d="M100 96 L68 52 M100 96 L132 52" stroke="#B9AFC0" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="64" cy="46" r="24" fill="${color}"/><circle cx="64" cy="46" r="24" fill="url(#${g})"/>
+    <circle cx="136" cy="46" r="24" fill="${color}"/><circle cx="136" cy="46" r="24" fill="url(#${g})"/>
+    <rect x="84" y="90" width="32" height="96" rx="16" fill="${color}"/><rect x="84" y="90" width="32" height="96" rx="16" fill="url(#${g})"/>
+    <rect x="94" y="118" width="12" height="3" rx="1.5" fill="#000" fill-opacity=".2"/></svg>`;
+  return `<svg viewBox="0 0 200 200" aria-hidden="true">${shade}
+    <rect x="44" y="30" width="112" height="146" rx="14" fill="${color}"/><rect x="44" y="30" width="112" height="146" rx="14" fill="url(#${g})"/>
+    <path d="M44 48 h112" stroke="#000" stroke-opacity=".12" stroke-width="2" stroke-dasharray="4 4"/>
+    <ellipse cx="100" cy="104" rx="30" ry="38" fill="#fff" fill-opacity=".7"/>
+    <circle cx="89" cy="96" r="4" fill="${color}"/><circle cx="111" cy="96" r="4" fill="${color}"/><path d="M92 118 q8 5 16 0" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <text x="100" y="160" text-anchor="middle" font-family="DM Mono, monospace" font-size="11" letter-spacing="2" fill="#2A1F2D" fill-opacity=".7">COLLAGÈNE</text></svg>`;
+}
+
+/* ===== Panier ===== */
+let cart = store.get("cart", []);      // [{id, qty}]
+let appliedCode = store.get("code", null);
+function saveCart() { store.set("cart", cart); store.set("code", appliedCode); }
+function addToCart(id, qty = 1) {
+  const f = findVariant(id); if (!f) return;
+  const line = cart.find(l => l.id === id);
+  const inCart = line ? line.qty : 0;
+  if (inCart + qty > f.v.stock) { toast(f.v.stock ? "Plus que " + f.v.stock + " en stock pour " + f.v.t : f.v.t + " est épuisé"); return; }
+  if (line) line.qty += qty; else cart.push({ id, qty });
+  saveCart(); renderCart();
+  const b = $("#openCart"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump");
+  toast(f.p.name + " · " + f.v.t + " ajouté");
+}
+function setQty(id, qty) {
+  const f = findVariant(id); const line = cart.find(l => l.id === id); if (!line || !f) return;
+  if (qty > f.v.stock) { toast("Plus que " + f.v.stock + " en stock"); return; }
+  if (qty <= 0) cart = cart.filter(l => l.id !== id); else line.qty = qty;
+  saveCart(); renderCart();
+}
+function totals() {
+  const sub = cart.reduce((s, l) => { const f = findVariant(l.id); return s + (f ? f.v.price * l.qty : 0); }, 0);
+  const pct = appliedCode ? CONFIG.codes[appliedCode] || 0 : 0;
+  const disc = Math.round(sub * pct) / 100;
+  return { sub, pct, disc, total: sub - disc };
+}
+function renderCart() {
+  cart = cart.filter(l => findVariant(l.id));
+  const count = cart.reduce((s, l) => s + l.qty, 0);
+  $("#cartCount").textContent = count;
+  const box = $("#items");
+  if (!cart.length) {
+    box.innerHTML = `<div class="empty"><p>Ton panier est vide. Commence par une pierre, ou laisse le quiz choisir pour toi.</p><a class="btn btn-ghost" href="#quiz" data-close>Faire le quiz</a></div>`;
+  } else {
+    box.innerHTML = cart.map(l => {
+      const { p, v } = findVariant(l.id);
+      return `<div class="line-item">
+        <div class="line-art">${art(p.key, v.c)}</div>
+        <div class="meta"><b>${p.name}</b><small>${v.t} · ${eur(v.price)}</small><br>
+          <span class="qty"><button type="button" data-q="${l.id}" data-d="-1" aria-label="Retirer un">−</button><span>${l.qty}</span><button type="button" data-q="${l.id}" data-d="1" aria-label="Ajouter un">+</button></span></div>
+        <span class="mono">${eur(v.price * l.qty)}</span></div>`;
+    }).join("");
+  }
+  const t = totals();
+  $("#tSub").textContent = eur(t.sub);
+  $("#tDiscRow").hidden = !t.pct;
+  $("#tDiscLabel").textContent = "Code " + appliedCode + " (-" + t.pct + " %)";
+  $("#tDisc").textContent = "-" + eur(t.disc);
+  $("#tTotal").textContent = eur(t.total);
+  const left = CONFIG.freeShipping - t.total;
+  $("#shipMsg").textContent = !cart.length ? "Livraison offerte dès " + eur(CONFIG.freeShipping)
+    : left > 0 ? "Plus que " + eur(left) + " pour la livraison offerte" : "Livraison offerte débloquée";
+  $("#shipBar").style.width = Math.min(100, t.total / CONFIG.freeShipping * 100) + "%";
+  const co = $("#checkout");
+  if (cart.length) {
+    co.href = CONFIG.shop + "/cart/" + cart.map(l => l.id + ":" + l.qty).join(",") + (appliedCode ? "?discount=" + encodeURIComponent(appliedCode) : "");
+    co.removeAttribute("aria-disabled"); co.style.pointerEvents = "";
+  } else { co.href = "#"; co.setAttribute("aria-disabled", "true"); co.style.pointerEvents = "none"; }
+  co.style.opacity = cart.length ? "" : ".45";
+  if (appliedCode) { $("#codeMsg").className = "code-msg ok"; $("#codeMsg").textContent = "Code " + appliedCode + " appliqué : -" + t.pct + " %"; }
+}
+function applyCode(raw) {
+  const code = (raw || "").trim().toUpperCase();
+  const msg = $("#codeMsg");
+  if (!code) { msg.className = "code-msg err"; msg.textContent = "Saisis un code, par exemple " + CONFIG.promoCode + "."; return false; }
+  if (!CONFIG.codes[code]) { msg.className = "code-msg err"; msg.textContent = "Le code " + code + " n'existe pas. Vérifie l'orthographe."; return false; }
+  appliedCode = code; saveCart(); renderCart(); $("#codeInput").value = code; return true;
+}
+function openCart() { $("#drawer").classList.add("open"); $("#scrim").classList.add("open"); $("#drawer").setAttribute("aria-hidden", "false"); $("#closeCart").focus(); }
+function closeCart() { $("#drawer").classList.remove("open"); $("#scrim").classList.remove("open"); $("#drawer").setAttribute("aria-hidden", "true"); }
+$("#openCart").addEventListener("click", openCart);
+$("#closeCart").addEventListener("click", closeCart);
+$("#scrim").addEventListener("click", closeCart);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeCart(); });
+$("#items").addEventListener("click", e => {
+  const b = e.target.closest("[data-q]"); if (b) { const l = cart.find(l => l.id === b.dataset.q); setQty(b.dataset.q, l.qty + +b.dataset.d); }
+  if (e.target.closest("[data-close]")) closeCart();
+});
+$("#codeForm").addEventListener("submit", e => { e.preventDefault(); applyCode($("#codeInput").value); });
+
+/* ===== Bandeau promo + compte à rebours ===== */
+$("#promoCode").textContent = CONFIG.promoCode;
+$("#promoPct").textContent = "-" + CONFIG.codes[CONFIG.promoCode] + " %";
+$("#promoCode").addEventListener("click", () => { copy(CONFIG.promoCode); applyCode(CONFIG.promoCode); });
+function tick() {
+  const ms = Math.max(0, new Date(CONFIG.promoEnd) - Date.now());
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, s = Math.floor(ms / 1e3) % 60;
+  const p = n => String(n).padStart(2, "0");
+  $("#cdD").textContent = p(d) + "j"; $("#cdH").textContent = p(h) + "h"; $("#cdM").textContent = p(m) + "m"; $("#cdS").textContent = p(s) + "s";
+}
+tick(); setInterval(tick, 1000);
+
+/* ===== Héros : choix de la teinte ===== */
+const gs = PRODUCTS[0];
+let heroVariant = gs.variants[0];
+function renderHero() {
+  $("#heroArt").innerHTML = art("guasha", heroVariant.c);
+  $("#heroLabel").textContent = heroVariant.t + " · " + heroVariant.stock + " en stock";
+  $("#heroAdd").textContent = "Ajouter le duo " + heroVariant.t + " · " + eur(heroVariant.price);
+  $("#heroSwatches").innerHTML = gs.variants.map(v =>
+    `<button class="swatch" type="button" style="--c:${v.c}" data-v="${v.id}" aria-pressed="${v.id === heroVariant.id}" aria-label="${v.t}"></button>`).join("") +
+    `<span class="swatch-meta">Pierre ${heroVariant.t.toLowerCase()}</span>`;
+}
+$("#heroSwatches").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (!b) return; heroVariant = gs.variants.find(v => v.id === b.dataset.v); renderHero(); });
+$("#heroAdd").addEventListener("click", () => addToCart(heroVariant.id));
+renderHero();
+
+/* ===== Boutique ===== */
+const selected = {};
+PRODUCTS.forEach(p => selected[p.key] = (p.variants.find(v => v.stock > 0) || p.variants[0]).id);
+function stockLine(v) {
+  if (!v.stock) return `<span class="stock out">Épuisé dans cette finition</span>`;
+  if (v.stock <= 5) return `<span class="stock low">Plus que ${v.stock} en stock</span>`;
+  return `<span class="stock">En stock</span>`;
+}
+function renderShop() {
+  $("#shopGrid").innerHTML = PRODUCTS.map(p => {
+    const v = p.variants.find(v => v.id === selected[p.key]);
+    const promoPrice = v.price * (1 - CONFIG.codes[CONFIG.promoCode] / 100);
+    const unit = v.n ? `<span class="unit">${eur(v.price / v.n)} / masque${v.n > 1 ? " · -" + Math.round((1 - v.price / v.n / p.variants[0].price) * 100) + " %" : ""}</span>` : "";
+    return `<article class="card">
+      <div class="card-media">
+        <span class="badge">${p.badge}</span>
+        ${art(p.key, v.c)}
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.remove()">
+      </div>
+      <div class="card-body">
+        <span class="card-type">${p.type}</span>
+        <h3>${p.name}</h3>
+        <p class="desc">${p.desc}</p>
+        <div class="opts" role="group" aria-label="${p.optLabel}">
+          ${p.variants.map(o => `<button class="opt${o.stock ? "" : " soldout"}" type="button" data-p="${p.key}" data-v="${o.id}" aria-pressed="${o.id === v.id}">${p.key === "mask" ? "" : `<i style="--c:${o.c}"></i>`}${o.t}</button>`).join("")}
+        </div>
+        <div class="price-row"><span class="price">${eur(promoPrice)}<s>${eur(v.price)}</s></span>${unit}</div>
+        ${stockLine(v)}
+      </div>
+      <div class="card-foot"><button class="btn btn-primary" type="button" data-add="${v.id}" ${v.stock ? "" : "disabled"}>${v.stock ? "Ajouter au panier" : "Épuisé"}</button></div>
+    </article>`;
+  }).join("");
+}
+$("#shopGrid").addEventListener("click", e => {
+  const o = e.target.closest("[data-p]"); if (o) { selected[o.dataset.p] = o.dataset.v; renderShop(); return; }
+  const a = e.target.closest("[data-add]"); if (a) addToCart(a.dataset.add);
+});
+renderShop();
+
+/* ===== Quiz ===== */
+const QUIZ = [
+  { q: "Ce que tu cherches surtout", a: [
+    { b: "Un vrai moment de détente", s: "Relâcher la mâchoire, souffler", w: { guasha: 2, sculpt: 1 } },
+    { b: "Un réveil en douceur", s: "Le visage un peu gonflé au lever", w: { guasha: 2, mask: 1 } },
+    { b: "Un soin cocooning express", s: "Hydrater sans y penser", w: { mask: 3 } } ] },
+  { q: "Le temps que tu y consacres", a: [
+    { b: "2 minutes", s: "Entre le café et la douche", w: { guasha: 1, mask: 1 } },
+    { b: "5 minutes", s: "Le rituel guidé complet", w: { guasha: 2, sculpt: 1 } },
+    { b: "15 minutes et plus", s: "Masque, puis massage", w: { mask: 2, sculpt: 2 } } ] },
+  { q: "Ton budget", a: [
+    { b: "Moins de 20 €", s: "Je découvre", w: { guasha: 2, mask: 2 } },
+    { b: "Entre 20 et 50 €", s: "Je m'équipe", w: { sculpt: 2, guasha: 1 } },
+    { b: "Peu importe", s: "Je veux le rituel complet", w: { sculpt: 3, mask: 1 } } ] }
+];
+const RESULTS = {
+  guasha: { v: "58801835278717", title: "Le duo Gua-Sha et Rouleau", why: ["Le gua-sha pour lisser du centre vers l'extérieur", "Le rouleau pour finir en fraîcheur, idéal le matin", "Suis le rituel guidé de 4 min 30 juste en dessous"] },
+  sculpt: { v: "58801835803005", title: "Le Sculpteur de Visage", why: ["Ses deux têtes épousent la mâchoire et le cou", "Prise en main ergonomique, geste facile", "Plus que quelques pièces en noir"] },
+  mask:   { v: "58801835639165", title: "Le pack de 5 Masques Collagène", why: ["Un masque par soirée de la semaine", "4,00 € le masque au lieu de 9,99 €", "Associe-le au rouleau pour faire pénétrer le sérum"] }
+};
+let quizStep = 0, score = {};
+function renderQuiz() {
+  document.querySelectorAll("#quizSteps span").forEach((s, i) => s.classList.toggle("on", i < quizStep || quizStep >= QUIZ.length));
+  const panel = $("#quizPanel");
+  if (quizStep < QUIZ.length) {
+    const q = QUIZ[quizStep];
+    panel.innerHTML = `<span class="eyebrow mono">Question ${quizStep + 1} sur ${QUIZ.length}</span><p class="quiz-q">${q.q}</p>
+      <div class="answers">${q.a.map((a, i) => `<button class="answer" type="button" data-a="${i}"><b>${a.b}</b><span>${a.s}</span></button>`).join("")}</div>`;
+    return;
+  }
+  const best = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
+  const r = RESULTS[best]; const f = findVariant(r.v);
+  const extra = best !== "mask" ? RESULTS.mask : null;
+  panel.innerHTML = `<span class="eyebrow">Ton rituel</span>
+    <div class="result"><div class="result-art">${art(f.p.key, f.v.c)}</div>
+      <div><p class="quiz-q">${r.title}</p><ul>${r.why.map(w => `<li>${w}</li>`).join("")}</ul></div></div>
+    <div class="hero-actions">
+      <button class="btn btn-primary" type="button" data-addq="${r.v}">Ajouter · ${eur(f.v.price)}</button>
+      ${extra ? `<button class="btn btn-ghost" type="button" data-addq="${extra.v}">+ 5 masques · ${eur(findVariant(extra.v).v.price)}</button>` : ""}
+      <button class="btn btn-ghost" type="button" data-restart>Recommencer</button>
+    </div>`;
+}
+$("#quizPanel").addEventListener("click", e => {
+  const a = e.target.closest("[data-a]");
+  if (a) { const w = QUIZ[quizStep].a[+a.dataset.a].w; for (const k in w) score[k] = (score[k] || 0) + w[k]; quizStep++; renderQuiz(); return; }
+  const add = e.target.closest("[data-addq]"); if (add) addToCart(add.dataset.addq);
+  if (e.target.closest("[data-restart]")) { quizStep = 0; score = {}; renderQuiz(); }
+});
+renderQuiz();
+
+/* ===== Rituel guidé ===== */
+const STEPS = [
+  { t: "Préparer", d: "Une noisette d'huile ou de sérum sur tout le visage", s: 30 },
+  { t: "Front", d: "Du centre vers les tempes, cinq passages", s: 60 },
+  { t: "Pommettes", d: "Du nez vers les oreilles, outil presque à plat", s: 60 },
+  { t: "Mâchoire", d: "Du menton jusque sous l'oreille", s: 60 },
+  { t: "Cou", d: "De haut en bas, vers les clavicules", s: 60 }
+];
+const C = 2 * Math.PI * 190;
+let rStep = 0, rLeft = STEPS[0].s, rTimer = null;
+$("#ring").style.strokeDasharray = C;
+function fmt(s) { return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+function renderRitual() {
+  $("#stepList").innerHTML = STEPS.map((s, i) => `<li class="${i === rStep ? "active" : i < rStep ? "done" : ""}"><span class="n">${i + 1}</span><span><b>${s.t}</b><small>${s.d}</small></span><span class="mono">${fmt(s.s)}</span></li>`).join("");
+  document.querySelectorAll(".zone").forEach(z => z.classList.toggle("active", +z.dataset.zone === rStep && rStep < STEPS.length));
+  $("#timer").textContent = rStep < STEPS.length ? fmt(rLeft) : "Fini";
+  const total = STEPS.reduce((a, s) => a + s.s, 0);
+  const done = STEPS.slice(0, rStep).reduce((a, s) => a + s.s, 0) + (rStep < STEPS.length ? STEPS[rStep].s - rLeft : 0);
+  $("#ring").style.strokeDashoffset = C * (1 - done / total);
+  $("#ritualPlay").textContent = rTimer ? "Pause" : rStep >= STEPS.length ? "Refaire le rituel" : rLeft < (STEPS[rStep] || {}).s ? "Reprendre" : "Démarrer";
+}
+function nextStep() { rStep++; if (rStep < STEPS.length) rLeft = STEPS[rStep].s; else { stopRitual(); toast("Rituel terminé. Rince ton outil et range-le au frais."); } renderRitual(); }
+function stopRitual() { clearInterval(rTimer); rTimer = null; }
+$("#ritualPlay").addEventListener("click", () => {
+  if (rTimer) { stopRitual(); renderRitual(); return; }
+  if (rStep >= STEPS.length) { rStep = 0; rLeft = STEPS[0].s; }
+  rTimer = setInterval(() => { rLeft--; if (rLeft <= 0) nextStep(); else renderRitual(); }, 1000);
+  renderRitual();
+});
+$("#ritualNext").addEventListener("click", () => { if (rStep < STEPS.length) nextStep(); });
+$("#ritualReset").addEventListener("click", () => { stopRitual(); rStep = 0; rLeft = STEPS[0].s; renderRitual(); });
+renderRitual();
+
+/* ===== Roue des offres ===== */
+const SEGMENTS = [
+  { pct: 5, code: "ROUE5", w: 3 }, { pct: 10, code: "ROUE10", w: 2 }, { pct: 5, code: "ROUE5", w: 3 },
+  { pct: 15, code: "ROUE15", w: 1 }, { pct: 10, code: "ROUE10", w: 2 }, { pct: 5, code: "ROUE5", w: 3 }
+];
+const SEG_COLORS = ["#E8B4BB", "#6FA58C", "#F3F0EC", "#2F6F5C", "#D9C7DE", "#C98E97"];
+const wheel = $("#wheel"), ctx = wheel.getContext("2d");
+let angle = 0, spinning = false;
+function drawWheel() {
+  const W = wheel.width, R = W / 2, n = SEGMENTS.length, a = 2 * Math.PI / n;
+  ctx.clearRect(0, 0, W, W);
+  ctx.save(); ctx.translate(R, R); ctx.rotate(angle);
+  for (let i = 0; i < n; i++) {
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.arc(0, 0, R - 8, i * a - Math.PI / 2, (i + 1) * a - Math.PI / 2); ctx.closePath();
+    ctx.fillStyle = SEG_COLORS[i]; ctx.fill();
+    ctx.strokeStyle = "rgba(42,31,45,.35)"; ctx.lineWidth = 3; ctx.stroke();
+    ctx.save(); ctx.rotate(i * a + a / 2 - Math.PI / 2);
+    ctx.fillStyle = ["#2F6F5C", "#6FA58C", "#C98E97"].includes(SEG_COLORS[i]) ? "#FFFFFF" : "#2A1F2D";
+    ctx.font = "64px Italiana, Didot, Georgia, serif"; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    ctx.fillText("-" + SEGMENTS[i].pct + " %", R - 50, 0);
+    ctx.restore();
+  }
+  ctx.restore();
+  ctx.beginPath(); ctx.arc(R, R, 62, 0, 2 * Math.PI); ctx.fillStyle = "#2A1F2D"; ctx.fill();
+  ctx.lineWidth = 6; ctx.strokeStyle = "#E8B4BB"; ctx.stroke();
+  ctx.fillStyle = "#F4F2F6"; ctx.font = "34px Italiana, Didot, Georgia, serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("S", R, R + 2);
+}
+function showPrize(seg) {
+  $("#prize").hidden = false; $("#prizeBig").textContent = "-" + seg.pct + " %"; $("#prizeCode").textContent = seg.code;
+  $("#spin").textContent = "Roue déjà tournée"; $("#spin").disabled = true;
+}
+$("#spin").addEventListener("click", () => {
+  if (spinning) return;
+  const totalW = SEGMENTS.reduce((s, x) => s + x.w, 0);
+  let r = Math.random() * totalW, idx = 0;
+  while ((r -= SEGMENTS[idx].w) > 0) idx++;
+  const a = 2 * Math.PI / SEGMENTS.length;
+  const target = -(idx * a + a / 2) + (Math.random() - .5) * a * .6;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const TAU = 2 * Math.PI, start = angle;
+  const end = start + (((target - start) % TAU) + TAU) % TAU + TAU * (reduce ? 0 : 6);
+  const dur = reduce ? 300 : 4200, t0 = performance.now();
+  spinning = true; $("#spin").disabled = true;
+  (function frame(now) {
+    const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 4);
+    angle = start + (end - start) * e; drawWheel();
+    if (k < 1) requestAnimationFrame(frame);
+    else { spinning = false; store.set("prize", idx); showPrize(SEGMENTS[idx]); toast("Bravo, -" + SEGMENTS[idx].pct + " % pour toi"); }
+  })(t0);
+});
+$("#prizeCode").addEventListener("click", () => copy($("#prizeCode").textContent));
+$("#prizeApply").addEventListener("click", () => { if (applyCode($("#prizeCode").textContent)) { openCart(); } });
+const savedPrize = store.get("prize", null);
+if (savedPrize !== null && SEGMENTS[savedPrize]) { const a = 2 * Math.PI / SEGMENTS.length; angle = -(savedPrize * a + a / 2); showPrize(SEGMENTS[savedPrize]); }
+drawWheel();
+if (document.fonts) document.fonts.ready.then(drawWheel);
+
+renderCart();
+</script>
+</body>
+</html>
