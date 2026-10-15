@@ -111,57 +111,47 @@ header.site:not(.solid) .btn-brand { background: var(--night); color: #fff; box-
 .hero-copy { display: grid; gap: 26px; min-width: 0; }
 .hero .eyebrow { color: #1D1325; }
 .hero h1 { font-size: clamp(3.1rem, 7.4vw, 6.4rem); }
-.swap { display: inline-grid; vertical-align: bottom; }
-.swap > span { grid-area: 1 / 1; transition: transform .6s var(--ease), opacity .4s; }
-.swap > span.out { transform: translateY(-60%) rotate(-4deg); opacity: 0; }
-.swap > span.in { transform: translateY(60%) rotate(4deg); opacity: 0; }
 .hero .lede { color: rgba(29,19,37,.82); font-size: 1.15rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .reassure { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: .95rem; font-weight: 600; }
 .reassure span { display: inline-flex; align-items: center; gap: 8px; }
 .reassure span::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: #1D1325 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 12.5l4 4 8-9' fill='none' stroke='%23FF5A2C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>") center/12px no-repeat; }
 
-/* Écran de contrôle */
-.monitor-wrap { position: relative; min-width: 0; padding-block: 18px 44px; }
-.monitor { position: relative; background: var(--night); border-radius: 22px; padding: 12px; box-shadow: 0 50px 80px -40px rgba(29,19,37,.85), 0 0 0 1px rgba(255,255,255,.06) inset; color: var(--on-night); animation: lift 1.1s var(--ease) backwards .1s; }
-@keyframes lift { from { transform: translateY(40px) rotate(2deg) scale(.96); } }
-.mon-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 4px 6px 12px; font: 500 .72rem var(--f-mono); letter-spacing: .06em; }
-.mon-top .rec { display: inline-flex; align-items: center; gap: 7px; color: #fff; }
-.mon-top .rec i { width: 9px; height: 9px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 10px var(--rec); animation: blink 1.4s steps(2, start) infinite; }
-@keyframes blink { to { visibility: hidden; } }
-.mon-top .file { opacity: .55; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-.mon-top .time { color: var(--brand); font-size: .8rem; }
-.viewport { position: relative; aspect-ratio: 16 / 11; max-width: 100%; border-radius: 12px; background: repeating-linear-gradient(135deg, #24182D 0 14px, #20152A 14px 28px); display: grid; place-items: center; overflow: hidden; }
-.frame { position: relative; height: 88%; aspect-ratio: 16 / 9; max-width: 92%; border-radius: 8px; overflow: hidden; background: #000; transition: aspect-ratio .7s var(--ease), height .7s var(--ease); }
-.frame[data-fmt="square"] { aspect-ratio: 1; }
-.frame[data-fmt="story"] { aspect-ratio: 9 / 16; }
-.frame[data-fmt="wide"] { height: auto; width: 92%; }
-.frame video, .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .5s; }
-.frame .layer { opacity: 0; }
-.frame .layer.on { opacity: 1; }
-.viewport .marks { position: absolute; inset: 7%; pointer-events: none; }
-.viewport .marks i { position: absolute; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.55); }
-.viewport .marks i:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; }
-.viewport .marks i:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
-.viewport .marks i:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; }
-.viewport .marks i:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
-.viewport .dimtag { position: absolute; left: 10px; bottom: 10px; font: 500 .68rem var(--f-mono); background: rgba(29,19,37,.8); color: #fff; padding: 4px 8px; border-radius: 6px; z-index: 2; }
-.mon-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 4px 2px; }
-.fmt-switch { display: inline-flex; background: var(--night-2); border-radius: 999px; padding: 4px; gap: 2px; }
-.fmt-switch button { border: 0; background: transparent; color: rgba(246,240,248,.7); border-radius: 999px; padding: 7px 12px; font: 500 .78rem var(--f-mono); display: inline-flex; align-items: center; gap: 7px; transition: background .2s, color .2s; }
-.fmt-switch button i { display: inline-block; border: 1.5px solid currentColor; border-radius: 2px; }
-.fmt-switch button[aria-pressed="true"] { background: var(--brand); color: #1D1325; }
-.sound { border: 0; background: rgba(255,255,255,.1); color: #fff; border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: .85rem; display: inline-flex; align-items: center; gap: 8px; transition: background .2s; }
-.sound:hover { background: rgba(255,255,255,.18); }
+/* Studio de style : téléphone qui joue la pub du style choisi */
+.style-stage { position: relative; min-width: 0; display: grid; justify-items: center; gap: 18px; padding-block: 10px 30px; --glow: #FF3EA5; }
+.ghost { position: absolute; z-index: 0; top: 46%; left: 50%; transform: translate(-50%, -50%); font-family: var(--f-display); font-weight: 800; font-size: clamp(4rem, 11vw, 9rem); line-height: .8; letter-spacing: -.06em; color: rgba(29,19,37,.1); text-align: center; white-space: nowrap; pointer-events: none; transition: opacity .4s; }
+.phone { position: relative; z-index: 1; width: min(300px, 70vw); aspect-ratio: 9 / 19; border-radius: 44px; background: #0E0A12; padding: 11px; box-shadow: 0 0 0 2px #2E2436, 0 50px 90px -40px rgba(29,19,37,.9), 0 0 120px -20px var(--glow); transition: box-shadow .8s var(--ease); animation: lift 1.1s var(--ease) backwards .1s; }
+@keyframes lift { from { transform: translateY(40px) rotate(3deg) scale(.96); } }
+.phone::before { content: ""; position: absolute; top: 19px; left: 50%; transform: translateX(-50%); width: 84px; height: 24px; border-radius: 999px; background: #0E0A12; z-index: 3; }
+.screen9 { position: relative; height: 100%; border-radius: 34px; overflow: hidden; background: #000; }
+.screen9 video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.screen9 .veil { position: absolute; inset: 0; background: #000; opacity: 0; transition: opacity .35s; pointer-events: none; }
+.screen9.switching .veil { opacity: 1; }
+.screen9 .prog9 { position: absolute; top: 12px; left: 16px; right: 16px; display: flex; gap: 4px; z-index: 2; }
+.screen9 .prog9 i { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; }
+.screen9 .prog9 i b { display: block; height: 100%; width: 0; background: #fff; }
+.screen9 .prog9 i.done b { width: 100%; }
+.phone .sound { position: absolute; z-index: 4; right: -16px; bottom: 70px; }
+.style-label { position: absolute; z-index: 4; left: -40px; top: 64px; background: #FFFFFF; color: #1D1325; border-radius: 16px; padding: 10px 14px; box-shadow: 0 20px 34px -18px rgba(29,19,37,.7); display: grid; gap: 1px; transform: rotate(-4deg); min-width: 150px; }
+.style-label small { font: 500 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #655A6C; }
+.style-label b { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -.02em; line-height: 1.1; }
+.style-label span { font-size: .8rem; color: #655A6C; }
+.chips9 { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 440px; }
+.chips9 button { border: 0; background: rgba(29,19,37,.12); color: #1D1325; border-radius: 999px; padding: 8px 14px; font-weight: 600; font-size: .88rem; display: inline-flex; align-items: center; gap: 8px; transition: background .2s, color .2s, transform .2s var(--ease); }
+.chips9 button i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px rgba(255,255,255,.6); }
+.chips9 button:hover { transform: translateY(-2px); }
+.chips9 button[aria-pressed="true"] { background: #1D1325; color: #fff; }
+.sound { border: 0; background: #FFFFFF; color: #1D1325; border-radius: 999px; padding: 9px 14px; font-weight: 600; font-size: .85rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 14px 26px -14px rgba(29,19,37,.8); transition: transform .2s var(--ease); }
+.sound:hover { transform: scale(1.04); }
 .sound svg { width: 16px; height: 16px; }
-.sticker { position: absolute; left: -12px; top: 0; z-index: 3; background: var(--lilac); color: #1D1325; font: 500 .72rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; padding: 8px 12px; border-radius: 10px; transform: rotate(-6deg); box-shadow: 0 12px 22px -12px rgba(29,19,37,.7); }
-.stat-badge { position: absolute; right: -14px; bottom: -34px; z-index: 3; background: #FFFFFF; color: #1D1325; border-radius: 18px; padding: 12px 16px 12px 12px; box-shadow: 0 24px 40px -20px rgba(29,19,37,.75); display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: center; transform: rotate(-2.5deg); animation: bob 6s ease-in-out infinite; }
+.stat-badge { position: absolute; right: -6px; bottom: 120px; z-index: 4; background: #FFFFFF; color: #1D1325; border-radius: 18px; padding: 12px 16px 12px 12px; box-shadow: 0 24px 40px -20px rgba(29,19,37,.75); display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: center; transform: rotate(3deg); animation: bob 6s ease-in-out infinite; }
 .stat-badge .ico { grid-row: span 2; width: 40px; height: 40px; border-radius: 12px; background: var(--brand); display: grid; place-items: center; }
 .stat-badge .ico svg { width: 22px; height: 22px; }
-.stat-badge b { font-family: var(--f-display); font-weight: 800; font-size: 1.45rem; line-height: 1; letter-spacing: -.03em; }
-.stat-badge small { font-size: .78rem; color: #655A6C; line-height: 1.2; }
+.stat-badge b { font-family: var(--f-display); font-weight: 800; font-size: 1.35rem; line-height: 1; letter-spacing: -.03em; }
+.stat-badge small { font-size: .76rem; color: #655A6C; line-height: 1.2; }
 @keyframes bob { 50% { translate: 0 -8px; } }
-@media (max-width: 600px) { .sticker { left: 4px; } .stat-badge { right: 4px; padding: 9px 12px 9px 9px; } .stat-badge b { font-size: 1.2rem; } .stat-badge .ico { width: 32px; height: 32px; } .fmt-switch button span { display: none; } }
+@media (max-width: 1100px) { .style-label { left: -10px; } .stat-badge { right: 0; } }
+@media (max-width: 600px) { .style-label { left: 0; top: 40px; min-width: 0; padding: 8px 12px; } .style-label b { font-size: 1rem; } .style-label span { display: none; } .stat-badge { right: 0; bottom: auto; top: 46%; padding: 8px 12px 8px 8px; } .stat-badge b { font-size: 1.1rem; } .stat-badge .ico { width: 30px; height: 30px; } .phone .sound { right: -6px; } }
 
 /* ===== Bandeau plateformes ===== */
 .platforms { background: var(--night); color: var(--on-night); overflow: hidden; border-block: 1px solid var(--night-line); }
@@ -225,6 +215,61 @@ header.site:not(.solid) .btn-brand { background: var(--night); color: #fff; box-
 .spark .a { fill: url(#sparkFill); }
 .spark circle { fill: var(--brand); stroke: var(--night); stroke-width: 3; }
 .spark text { font: 500 10px var(--f-mono); fill: rgba(246,240,248,.55); }
+
+/* ===== Galerie des styles ===== */
+.styles-section { background: var(--night); color: var(--on-night); overflow: hidden; }
+.styles-section .lede { color: rgba(246,240,248,.72); }
+.styles-section h2 em { font-style: normal; background: linear-gradient(90deg, #FF3EA5, #FFC83D 30%, #3DDC97 55%, #22D3EE 75%, #CBBBFF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 22px); }
+@media (max-width: 900px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile { position: relative; border: 0; padding: 0; border-radius: 22px; overflow: hidden; aspect-ratio: 9 / 14; max-width: 100%; background: #000; color: #fff; text-align: left; isolation: isolate; transition: transform .45s var(--ease), box-shadow .45s; box-shadow: 0 0 0 1px var(--night-line); }
+.tile:hover { transform: translateY(-6px) rotate(-.6deg); box-shadow: 0 0 0 2px var(--c), 0 40px 70px -30px var(--c); }
+.tile img, .tile video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .8s var(--ease), opacity .4s; }
+.tile video { opacity: 0; }
+.tile.playing video { opacity: 1; }
+.tile:hover img { transform: scale(1.04); }
+.tile::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, transparent 28%, transparent 52%, rgba(0,0,0,.85) 100%); }
+.tile .tnum { position: absolute; top: 14px; left: 14px; font: 500 .72rem var(--f-mono); letter-spacing: .08em; background: rgba(0,0,0,.45); backdrop-filter: blur(6px); padding: 4px 9px; border-radius: 999px; }
+.tile .tplay { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border-radius: 50%; background: var(--c); display: grid; place-items: center; transition: transform .3s var(--ease); }
+.tile .tplay svg { width: 14px; margin-left: 2px; }
+.tile:hover .tplay { transform: scale(1.12); }
+.tile .tbody { position: absolute; left: 0; right: 0; bottom: 0; padding: clamp(14px, 2vw, 22px); display: grid; gap: 6px; }
+.tile .tbrand { font: 500 .7rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--c); }
+.tile h3 { font-size: clamp(1.3rem, 2.4vw, 1.9rem); }
+.tile .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+.tile .tags span { font-size: .74rem; font-weight: 500; padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.14); backdrop-filter: blur(6px); }
+@media (max-width: 520px) { .tile .tags { display: none; } .tile .tplay { width: 32px; height: 32px; } }
+.your-style { margin-top: clamp(18px, 3vw, 28px); display: grid; grid-template-columns: auto 1fr auto; gap: 18px 28px; align-items: center; padding: clamp(20px, 3vw, 30px); border-radius: 24px; background: var(--night-2); box-shadow: inset 0 0 0 1px var(--night-line); }
+@media (max-width: 760px) { .your-style { grid-template-columns: 1fr; } }
+.your-style .swatches { display: flex; }
+.your-style .swatches i { width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--night-2); margin-left: -12px; }
+.your-style .swatches i:first-child { margin-left: 0; }
+.your-style h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+.your-style p { color: rgba(246,240,248,.7); margin-top: 4px; }
+
+/* Visionneuse plein écran */
+.viewer { position: fixed; inset: 0; z-index: 80; background: rgba(10,6,14,.92); backdrop-filter: blur(10px); display: grid; grid-template-columns: auto minmax(0, 420px) minmax(0, 360px) auto; justify-content: center; align-items: center; gap: clamp(12px, 3vw, 40px); padding: calc(20px + env(safe-area-inset-top, 0px)) 16px calc(20px + env(safe-area-inset-bottom, 0px)); color: #fff; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.viewer.open { opacity: 1; pointer-events: auto; }
+.viewer .vphone { position: relative; height: min(78vh, 760px); aspect-ratio: 9 / 16; max-width: 100%; border-radius: 26px; overflow: hidden; background: #000; box-shadow: 0 0 0 2px #2E2436, 0 0 140px -30px var(--c); justify-self: center; transform: scale(.96); transition: transform .4s var(--ease), box-shadow .6s; }
+.viewer.open .vphone { transform: none; }
+.viewer video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.viewer .vinfo { display: grid; gap: 14px; align-content: center; min-width: 0; }
+.viewer .vinfo .tbrand { font: 500 .74rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--c); }
+.viewer .vinfo h3 { font-size: clamp(1.8rem, 3.4vw, 2.8rem); }
+.viewer .vinfo p { color: rgba(255,255,255,.75); }
+.viewer .vinfo .count { font: 500 .85rem var(--f-mono); color: rgba(255,255,255,.6); }
+.varrow, .vclose { width: 52px; height: 52px; border-radius: 50%; border: 0; background: rgba(255,255,255,.12); color: #fff; display: grid; place-items: center; transition: background .2s, transform .2s var(--ease); }
+.varrow:hover, .vclose:hover { background: #fff; color: #1D1325; transform: scale(1.06); }
+.varrow svg, .vclose svg { width: 22px; height: 22px; }
+.vclose { position: absolute; top: calc(16px + env(safe-area-inset-top, 0px)); right: 16px; }
+@media (max-width: 900px) {
+  .viewer { grid-template-columns: auto 1fr auto; grid-template-rows: 1fr auto; align-content: center; gap: 12px; }
+  .viewer .vphone { grid-column: 1 / -1; height: min(64vh, 640px); }
+  .viewer .vinfo { grid-column: 1 / -1; grid-row: 2; text-align: center; justify-items: center; gap: 8px; }
+  .viewer .vinfo p { display: none; }
+  .varrow.vp { position: absolute; left: 10px; top: 40%; }
+  .varrow.vn { position: absolute; right: 10px; top: 40%; }
+}
 
 /* ===== Deux façons ===== */
 .ways { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -430,7 +475,8 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
   <div class="wrap">
     <a class="logo" href="#top"><span class="mark" aria-hidden="true"></span>Vif Visuel</a>
     <nav class="main" aria-label="Navigation principale">
-      <a href="#exemples">Exemples</a>
+      <a href="#styles">Styles</a>
+      <a href="#exemples">Réalisations</a>
       <a href="#methode">Comment ça marche</a>
       <a href="#offres">Offres</a>
       <a href="#faq">Questions</a>
@@ -445,64 +491,69 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <span class="eyebrow">Studio de pubs vidéo et visuels</span>
-        <h1>Envoyez vos photos, on en fait <span class="swap" id="swap"><span class="hl">une pub.</span></span></h1>
-        <p class="lede">Vidéos courtes et visuels pour Instagram, TikTok et Facebook, créés à partir de vos produits. Vous recevez des fichiers prêts à publier en 5 jours.</p>
+        <h1>Votre pub, dans <span class="hl">le style que vous voulez.</span></h1>
+        <p class="lede">Encre japonaise, néon rétro, luxe doré, pop coloré, papier découpé, motion tech… Envoyez vos photos, choisissez un style : on crée vos vidéos et visuels, prêts à publier en 5 jours.</p>
         <div class="hero-actions">
           <a class="btn btn-night" href="#contact">Demander mon devis gratuit <span class="arr">→</span></a>
-          <a class="btn btn-line" href="#exemples">Voir nos pubs</a>
+          <a class="btn btn-line" href="#styles">Voir les 6 styles</a>
         </div>
         <div class="reassure">
           <span>Devis gratuit sous 24 h</span>
-          <span>Retouches incluses</span>
+          <span>Tous les styles possibles</span>
           <span>Les pubs sont à vous</span>
         </div>
       </div>
 
-      <div class="monitor-wrap">
-        <span class="sticker">Une de nos pubs</span>
-        <div class="monitor">
-          <div class="mon-top">
-            <span class="rec"><i></i>REC</span>
-            <span class="file" id="monFile">VIF_PUB_PRODUITS_16x9.MP4</span>
-            <span class="time tc" id="monTime">00:00:00:00</span>
+      <div class="style-stage" id="styleStage">
+        <div class="ghost" id="ghost" aria-hidden="true">NÉON</div>
+        <div class="phone">
+          <div class="screen9" id="screen9">
+            <video id="heroVideo" autoplay muted playsinline preload="auto" aria-label="Exemple de pub dans le style choisi"></video>
+            <div class="prog9" id="prog9" aria-hidden="true"></div>
+            <span class="veil"></span>
           </div>
-          <div class="viewport">
-            <div class="frame" id="frame" data-fmt="wide">
-              <video class="layer on" id="heroVideo" src="media/pub-boutique.mp4" poster="media/pub-boutique.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Exemple de publicité vidéo"></video>
-              <img class="layer" id="heroSquare" src="media/carre-sculpteur.jpg" alt="Exemple de post carré">
-              <img class="layer" id="heroStory" src="media/story-guasha.jpg" alt="Exemple de story verticale">
-            </div>
-            <div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-            <span class="dimtag tc" id="dimTag">1920 × 1080</span>
-          </div>
-          <div class="mon-bar">
-            <div class="fmt-switch" role="group" aria-label="Format">
-              <button type="button" data-fmt="wide" aria-pressed="true"><i style="width:16px;height:9px"></i><span>16:9</span></button>
-              <button type="button" data-fmt="square" aria-pressed="false"><i style="width:11px;height:11px"></i><span>1:1</span></button>
-              <button type="button" data-fmt="story" aria-pressed="false"><i style="width:8px;height:14px"></i><span>9:16</span></button>
-            </div>
-            <button class="sound" id="heroSound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path id="soundWave" d="M23 9l-6 6M17 9l6 6"/></svg><span id="soundLabel">Activer le son</span></button>
-          </div>
+          <button class="sound" id="heroSound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path id="soundWave" d="M23 9l-6 6M17 9l6 6"/></svg><span id="soundLabel">Son</span></button>
         </div>
+        <div class="style-label" aria-live="polite"><small>Style</small><b id="styleName">Néon rétro</b><span id="styleFor">Bar, salle de jeux</span></div>
         <div class="stat-badge">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1325" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
           <b>10 000 vues</b><small>en une semaine pour un client</small>
         </div>
+        <div class="chips9" id="chips9" role="group" aria-label="Choisir un style"></div>
       </div>
     </div>
   </section>
 
   <div class="platforms" aria-hidden="true"><div class="platforms-track" id="platforms"></div></div>
 
-  <!-- Exemples -->
-  <section id="exemples" class="screening">
+  <!-- Galerie des styles -->
+  <section id="styles" class="styles-section">
     <div class="wrap">
       <div class="section-head split">
         <div style="display:grid; gap:16px;">
-          <span class="eyebrow">Exemples de pubs</span>
-          <h2>Installez-vous, ça commence.</h2>
+          <span class="eyebrow">Tous les styles</span>
+          <h2>Vous choisissez le style. <em>On crée la pub.</em></h2>
         </div>
-        <p class="lede">Des pubs réalisées pour une boutique de soins du visage. Faites défiler avec les flèches et lancez celle que vous voulez.</p>
+        <p class="lede">Six exemples parmi tout ce qu'on peut faire. Survolez pour un aperçu, cliquez pour regarder en grand avec le son.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <div class="your-style rv">
+        <div class="swatches" aria-hidden="true" id="swatches"></div>
+        <div><h3>Votre style n'est pas dans la liste ?</h3><p>Montrez-nous une pub que vous aimez, ou décrivez l'ambiance : on la crée pour votre marque.</p></div>
+        <a class="btn btn-brand" href="#contact" data-style-pick="Autre">Décrire mon style <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exemples -->
+  <section id="exemples" class="screening" style="border-top: 1px solid var(--night-line);">
+    <div class="wrap">
+      <div class="section-head split">
+        <div style="display:grid; gap:16px;">
+          <span class="eyebrow">Réalisation · e-commerce</span>
+          <h2>Une campagne, 10 000 vues.</h2>
+        </div>
+        <p class="lede">Trois vidéos réalisées pour une boutique de soins du visage. Faites défiler avec les flèches et lancez celle que vous voulez.</p>
       </div>
       <div class="player rv" id="player">
         <div class="stage">
@@ -671,6 +722,10 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
             </div>
           </fieldset>
           <fieldset class="fieldset">
+            <legend>Le style qui vous plaît</legend>
+            <div class="pick" id="pickStyle" role="group"></div>
+          </fieldset>
+          <fieldset class="fieldset">
             <legend>Votre idée</legend>
             <div class="mode" id="pickMode" role="group">
               <button type="button" data-v="idea" aria-pressed="true"><b>J'ai une idée</b><small>Je décris la pub que je veux</small></button>
@@ -739,12 +794,13 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
         <a class="btn btn-ink" href="#contact" style="justify-self:start">Poser ma question <span class="arr">→</span></a>
       </div>
       <div class="faq">
-        <details open><summary><span class="q">01</span>Quelles photos dois-je envoyer ?</summary><p>Vos produits, votre boutique, votre logo, même prises au téléphone. Plus vous en envoyez, plus on a de matière. Si une photo ne convient pas, on vous le dit tout de suite.</p></details>
-        <details><summary><span class="q">02</span>Je ne sais pas quelle pub faire, vous pouvez m'aider ?</summary><p>Oui. Choisissez « Proposez-moi » dans le formulaire, parlez-nous de votre activité, et on vous propose deux ou trois idées avant de commencer.</p></details>
-        <details><summary><span class="q">03</span>Vous utilisez l'IA ?</summary><p>Un peu, et on le dit : environ 20 % du travail. Elle nous aide à explorer des pistes d'accroches et à décliner une pub dans plusieurs formats. L'idée, le montage, les textes et chaque retouche sont faits par l'équipe, et rien ne part sans avoir été relu.</p></details>
-        <details><summary><span class="q">04</span>Est-ce que vous publiez les pubs pour moi ?</summary><p>Non. On crée vos pubs et on vous livre des fichiers prêts à publier, avec les textes d'accompagnement. Vous gardez la main sur vos réseaux et vous publiez quand vous voulez.</p></details>
-        <details><summary><span class="q">05</span>Comment se passe le paiement ?</summary><p>On commence par un devis gratuit. Si vous l'acceptez, on vous envoie un bon de commande à valider. À la livraison, vous recevez un lien de paiement sécurisé.</p></details>
-        <details><summary><span class="q">06</span>À qui appartiennent les pubs ?</summary><p>À vous. Une fois la commande réglée, les vidéos et visuels vous appartiennent et vous pouvez les utiliser sur tous vos supports, sans limite.</p></details>
+        <details open><summary><span class="q">01</span>Quels styles de pub pouvez-vous faire ?</summary><p>Tous ceux que vous voulez. Les six exemples du site (encre japonaise, néon rétro, luxe doré, pop coloré, papier découpé, motion tech) ne sont qu'un aperçu. Montrez-nous une pub qui vous plaît ou décrivez l'ambiance, et on l'adapte à votre marque.</p></details>
+        <details><summary><span class="q">02</span>Quelles photos dois-je envoyer ?</summary><p>Vos produits, votre boutique, votre logo, même prises au téléphone. Plus vous en envoyez, plus on a de matière. Si une photo ne convient pas, on vous le dit tout de suite.</p></details>
+        <details><summary><span class="q">03</span>Je ne sais pas quelle pub faire, vous pouvez m'aider ?</summary><p>Oui. Choisissez « Proposez-moi » dans le formulaire, parlez-nous de votre activité, et on vous propose deux ou trois idées avant de commencer.</p></details>
+        <details><summary><span class="q">04</span>Vous utilisez l'IA ?</summary><p>Un peu, et on le dit : environ 20 % du travail. Elle nous aide à explorer des pistes d'accroches et à décliner une pub dans plusieurs formats. L'idée, le montage, les textes et chaque retouche sont faits par l'équipe, et rien ne part sans avoir été relu.</p></details>
+        <details><summary><span class="q">05</span>Est-ce que vous publiez les pubs pour moi ?</summary><p>Non. On crée vos pubs et on vous livre des fichiers prêts à publier, avec les textes d'accompagnement. Vous gardez la main sur vos réseaux et vous publiez quand vous voulez.</p></details>
+        <details><summary><span class="q">06</span>Comment se passe le paiement ?</summary><p>On commence par un devis gratuit. Si vous l'acceptez, on vous envoie un bon de commande à valider. À la livraison, vous recevez un lien de paiement sécurisé.</p></details>
+        <details><summary><span class="q">07</span>À qui appartiennent les pubs ?</summary><p>À vous. Une fois la commande réglée, les vidéos et visuels vous appartiennent et vous pouvez les utiliser sur tous vos supports, sans limite.</p></details>
       </div>
     </div>
   </section>
@@ -796,47 +852,119 @@ let toastTimer;
 function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2400); }
 function timecode(s) { const f = Math.floor((s % 1) * 30); s = Math.floor(s); return pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60) + ":" + pad(f); }
 
-/* ===== Mot qui change dans le titre ===== */
-const WORDS = ["une pub.", "une story.", "un reel.", "une vidéo.", "une affiche."];
-let wi = 0;
-if (!reduce) setInterval(() => {
-  const box = $("#swap"), old = box.firstElementChild;
-  wi = (wi + 1) % WORDS.length;
-  const nw = document.createElement("span"); nw.className = "hl in"; nw.textContent = WORDS[wi];
-  box.appendChild(nw); requestAnimationFrame(() => requestAnimationFrame(() => nw.classList.remove("in")));
-  old.classList.add("out"); setTimeout(() => old.remove(), 650);
-}, 2600);
+/* ===== Styles ===== */
+const STYLES = [
+  { id: "neon",   name: "Néon rétro",      brand: "Arcadium 84 · bar arcade",    src: "media/style-neon.mp4",   poster: "media/style-neon.jpg",   c: "#FF3EA5", ghost: "NÉON",  tags: ["Nostalgique", "Festif", "Nocturne"],     forr: "Bar, salle de jeux, soirée",        desc: "Grille synthwave, néons qui grésillent, borne d'arcade et happy hour : l'énergie des années 80." },
+  { id: "pop",    name: "Pop coloré",      brand: "Écla · soda",                 src: "media/style-pop.mp4",    poster: "media/style-pop.jpg",    c: "#FFC83D", ghost: "POP",   tags: ["Joyeux", "Énergique", "Gourmand"],       forr: "Boissons, snacking, food truck",    desc: "Couleurs franches, typo XXL et produit qui saute à l'écran. Impossible de scroller sans s'arrêter." },
+  { id: "luxe",   name: "Luxe doré",       brand: "Aurèle · parfum",             src: "media/style-luxe.mp4",   poster: "media/style-luxe.jpg",   c: "#D9B26A", ghost: "LUXE",  tags: ["Élégant", "Sensoriel", "Premium"],      forr: "Parfumerie, bijouterie, beauté",    desc: "Matières dorées, lumière qui caresse le flacon, typographie fine : une pub qui se respire." },
+  { id: "encre",  name: "Encre japonaise", brand: "Kumo · matcha",               src: "media/style-encre.mp4",  poster: "media/style-encre.jpg",  c: "#E04A3A", ghost: "ENCRE", tags: ["Calme", "Épuré", "Artisanal"],          forr: "Salon de thé, épicerie fine",       desc: "Coups de pinceau, montagnes dans la brume, bol fumant : un rythme lent qui raconte un savoir-faire." },
+  { id: "papier", name: "Papier découpé",  brand: "Lunéo · train de nuit",       src: "media/style-papier.mp4", poster: "media/style-papier.jpg", c: "#F2B33D", ghost: "PAPIER",tags: ["Illustré", "Chaleureux", "Raconté"],     forr: "Voyage, tourisme, culture",         desc: "Décors en papier, petites étiquettes et carte animée : une histoire racontée en 25 secondes." },
+  { id: "tech",   name: "Motion tech",     brand: "Orva · néobanque",            src: "media/style-tech.mp4",   poster: "media/style-tech.jpg",   c: "#FF2D3D", ghost: "TECH",  tags: ["Moderne", "Dynamique", "Précis"],       forr: "Appli, start-up, services",         desc: "Interface animée, chiffres qui défilent, carte en 3D : votre produit numérique expliqué en un clin d'œil." }
+];
 
-/* ===== Écran de contrôle ===== */
+/* ===== Héros : téléphone qui enchaîne les styles ===== */
 const hv = $("#heroVideo");
-if (reduce) { hv.removeAttribute("autoplay"); hv.pause(); }
-const FMT = {
-  wide:   { layer: "#heroVideo",  file: "VIF_PUB_PRODUITS_16x9.MP4", dim: "1920 × 1080" },
-  square: { layer: "#heroSquare", file: "VIF_POST_SCULPTEUR_1x1.JPG", dim: "1080 × 1080" },
-  story:  { layer: "#heroStory",  file: "VIF_STORY_GUASHA_9x16.JPG", dim: "1080 × 1920" }
-};
-let fmt = "wide";
-$(".fmt-switch").addEventListener("click", e => {
-  const b = e.target.closest("[data-fmt]"); if (!b) return;
-  fmt = b.dataset.fmt;
-  $$(".fmt-switch [data-fmt]").forEach(x => x.setAttribute("aria-pressed", x === b));
-  $("#frame").dataset.fmt = fmt;
-  $$("#frame .layer").forEach(l => l.classList.toggle("on", l.matches(FMT[fmt].layer)));
-  $("#monFile").textContent = FMT[fmt].file; $("#dimTag").textContent = FMT[fmt].dim;
-  $("#heroSound").hidden = fmt !== "wide";
-  if (fmt === "wide") { if (!reduce) hv.play().catch(() => {}); } else hv.pause();
-});
-(function tickTime() {
-  $("#monTime").textContent = fmt === "wide" ? timecode(hv.currentTime || 0) : "IMG · " + FMT[fmt].dim.replace(/ /g, "");
-  requestAnimationFrame(tickTime);
-})();
+let hs = 0, heroAuto = true;
+$("#chips9").innerHTML = STYLES.map((st, i) => `<button type="button" data-hs="${i}" aria-pressed="${i === 0}" style="--c:${st.c}"><i></i>${st.name}</button>`).join("");
+$("#prog9").innerHTML = STYLES.map(() => "<i><b></b></i>").join("");
+function heroStyle(i, user) {
+  hs = (i + STYLES.length) % STYLES.length;
+  const st = STYLES[hs];
+  if (user) heroAuto = false;
+  const scr = $("#screen9"); scr.classList.add("switching");
+  setTimeout(() => {
+    hv.src = st.src; hv.poster = st.poster;
+    if (!reduce || user) hv.play().catch(() => {});
+    scr.classList.remove("switching");
+  }, reduce ? 0 : 280);
+  $("#styleStage").style.setProperty("--glow", st.c);
+  $("#ghost").textContent = st.ghost;
+  $("#styleName").textContent = st.name; $("#styleFor").textContent = st.forr;
+  $$("#chips9 [data-hs]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.hs === hs));
+  $$("#prog9 i").forEach((p, k) => { p.classList.toggle("done", k < hs); p.querySelector("b").style.width = k < hs ? "100%" : "0"; });
+}
+$("#chips9").addEventListener("click", e => { const b = e.target.closest("[data-hs]"); if (b) heroStyle(+b.dataset.hs, true); });
+hv.addEventListener("timeupdate", () => { const b = $$("#prog9 i b")[hs]; if (b && hv.duration) b.style.width = (hv.currentTime / hv.duration * 100) + "%"; });
+hv.addEventListener("ended", () => heroStyle(hs + 1, false));
+if (reduce) hv.removeAttribute("autoplay");
+heroStyle(0, false);
 function setHeroSound(on) {
   hv.muted = !on; if (on) hv.play().catch(() => {});
-  $("#soundLabel").textContent = on ? "Couper le son" : "Activer le son";
+  $("#soundLabel").textContent = on ? "Couper" : "Son";
   $("#soundWave").setAttribute("d", on ? "M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" : "M23 9l-6 6M17 9l6 6");
   $("#heroSound").setAttribute("aria-pressed", String(on));
 }
 $("#heroSound").addEventListener("click", () => { if (hv.muted) $("#stageVideo").pause(); setHeroSound(hv.muted); });
+
+/* ===== Galerie des styles ===== */
+$("#gallery").innerHTML = STYLES.map((st, i) => `<button class="tile rv" type="button" data-tile="${i}" style="--c:${st.c}" aria-label="Regarder la pub ${st.name}">
+  <img src="${st.poster}" alt="" loading="lazy"><video muted playsinline loop preload="none" data-src="${st.src}"></video>
+  <span class="tnum">${pad(i + 1)} / ${pad(STYLES.length)}</span>
+  <span class="tplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1D1325"/></svg></span>
+  <span class="tbody"><span class="tbrand">${st.brand}</span><h3>${st.name}</h3><span class="tags">${st.tags.map(t => `<span>${t}</span>`).join("")}</span></span></button>`).join("");
+$("#swatches").innerHTML = STYLES.map(st => `<i style="background:${st.c}"></i>`).join("");
+function previewTile(tile, on) {
+  const v = tile.querySelector("video");
+  if (on) { if (!v.src) v.src = v.dataset.src; v.play().then(() => tile.classList.add("playing")).catch(() => {}); }
+  else { v.pause(); tile.classList.remove("playing"); }
+}
+const canHover = matchMedia("(hover: hover)").matches;
+$$(".tile").forEach(t => {
+  if (canHover && !reduce) { t.addEventListener("mouseenter", () => previewTile(t, true)); t.addEventListener("mouseleave", () => previewTile(t, false)); }
+  t.addEventListener("click", () => openViewer(+t.dataset.tile));
+});
+if (!canHover && !reduce && "IntersectionObserver" in window) {
+  const tio = new IntersectionObserver(es => es.forEach(x => previewTile(x.target, x.intersectionRatio > .7)), { threshold: [0, .7] });
+  $$(".tile").forEach(t => tio.observe(t));
+}
+
+/* Visionneuse */
+const viewer = document.createElement("div");
+viewer.className = "viewer"; viewer.setAttribute("role", "dialog"); viewer.setAttribute("aria-modal", "true"); viewer.setAttribute("aria-label", "Pub en grand");
+viewer.innerHTML = `<button class="varrow vp" type="button" aria-label="Style précédent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <div class="vphone"><video playsinline controls></video></div>
+  <div class="vinfo"><span class="count tc"></span><span class="tbrand"></span><h3></h3><p></p><a class="btn btn-brand" href="#contact" data-vwant>Je veux ce style <span class="arr">→</span></a></div>
+  <button class="varrow vn" type="button" aria-label="Style suivant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button class="vclose" type="button" aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>`;
+document.body.appendChild(viewer);
+const vv = viewer.querySelector("video");
+let vi = 0, lastFocus = null;
+function showViewer(i) {
+  vi = (i + STYLES.length) % STYLES.length; const st = STYLES[vi];
+  viewer.style.setProperty("--c", st.c);
+  vv.src = st.src; vv.poster = st.poster; vv.muted = false; vv.play().catch(() => {});
+  viewer.querySelector(".count").textContent = pad(vi + 1) + " / " + pad(STYLES.length);
+  viewer.querySelector(".tbrand").textContent = st.brand;
+  viewer.querySelector("h3").textContent = st.name;
+  viewer.querySelector("p").textContent = st.desc;
+}
+function openViewer(i) {
+  lastFocus = document.activeElement;
+  setHeroSound(false); hv.pause(); $("#stageVideo").pause();
+  $$(".tile").forEach(t => previewTile(t, false));
+  viewer.classList.add("open"); document.documentElement.style.overflow = "hidden";
+  showViewer(i); viewer.querySelector(".vclose").focus();
+}
+function closeViewer() {
+  vv.pause(); viewer.classList.remove("open"); document.documentElement.style.overflow = "";
+  if (!reduce) hv.play().catch(() => {});
+  if (lastFocus) lastFocus.focus({ preventScroll: true });
+}
+viewer.querySelector(".vp").addEventListener("click", () => showViewer(vi - 1));
+viewer.querySelector(".vn").addEventListener("click", () => showViewer(vi + 1));
+viewer.querySelector(".vclose").addEventListener("click", closeViewer);
+viewer.addEventListener("click", e => { if (e.target === viewer) closeViewer(); });
+viewer.querySelector("[data-vwant]").addEventListener("click", () => { const name = STYLES[vi].name; closeViewer(); chooseStyle(name); });
+vv.addEventListener("ended", () => showViewer(vi + 1));
+document.addEventListener("keydown", e => {
+  if (!viewer.classList.contains("open")) return;
+  if (e.key === "Escape") closeViewer();
+  if (e.key === "ArrowRight") showViewer(vi + 1);
+  if (e.key === "ArrowLeft") showViewer(vi - 1);
+});
+let vtx = null;
+viewer.addEventListener("touchstart", e => { vtx = e.touches[0].clientX; }, { passive: true });
+viewer.addEventListener("touchend", e => { if (vtx === null) return; const dx = e.changedTouches[0].clientX - vtx; vtx = null; if (Math.abs(dx) > 60) showViewer(vi + (dx < 0 ? 1 : -1)); });
 
 /* ===== Bandeau plateformes ===== */
 $("#platforms").innerHTML = [...PLATFORMS, ...PLATFORMS, ...PLATFORMS, ...PLATFORMS].map(p => `<span>${p}</span>`).join("");
@@ -952,7 +1080,14 @@ function renderPlanPick() {
 renderPlanPick();
 
 /* ===== Formulaire en 3 étapes ===== */
-let step = 0, mode = "idea", files = [];
+let step = 0, mode = "idea", files = [], chosenStyle = "À définir ensemble";
+const styleOptions = [...STYLES.map(st => st.name), "Autre", "À définir ensemble"];
+function renderStylePick() {
+  $("#pickStyle").innerHTML = styleOptions.map(n => { const st = STYLES.find(x => x.name === n);
+    return `<button type="button" data-v="${n}" aria-pressed="${n === chosenStyle}">${st ? `<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${st.c};margin-right:7px"></i>` : ""}${n}</button>`; }).join("");
+}
+function chooseStyle(n) { chosenStyle = n; renderStylePick(); goStep(0); toast("Style « " + n + " » sélectionné"); }
+renderStylePick();
 function setMode(m) {
   mode = m;
   $$("#pickMode [data-v]").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === m));
@@ -978,6 +1113,8 @@ document.addEventListener("click", e => {
   const m = e.target.closest("[data-mode]"); if (m) { setMode(m.dataset.mode); goStep(0); }
 });
 $("#pickMode").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) setMode(b.dataset.v); });
+$("#pickStyle").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) { chosenStyle = b.dataset.v; renderStylePick(); } });
+document.addEventListener("click", e => { const a = e.target.closest("[data-style-pick]"); if (a) chooseStyle(a.dataset.stylePick); });
 $("#pickPlan").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) { chosenPlan = b.dataset.v; renderPlanPick(); } });
 $("#pickNeed").addEventListener("click", e => { const b = e.target.closest("[data-v]"); if (b) b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); });
 
@@ -1002,7 +1139,7 @@ function buildSummary() {
     "Nom : " + $("#cName").value.trim() + "\nEntreprise : " + ($("#cCompany").value.trim() || "-") +
     "\nE-mail : " + $("#cEmail").value.trim() + "\nTéléphone : " + ($("#cPhone").value.trim() || "-") +
     "\n\nBesoin : " + (needs.join(", ") || "-") + "\nOffre : " + chosenPlan +
-    "\nIdée : " + (mode === "idea" ? "j'ai une idée" : "proposez-moi des idées") +
+    "\nStyle : " + chosenStyle + "\nIdée : " + (mode === "idea" ? "j'ai une idée" : "proposez-moi des idées") +
     "\nPhotos : " + (files.length ? files.length + " fichier(s) : " + files.map(f => f.file.name).join(", ") : "aucune pour l'instant") +
     "\n\n" + (mode === "idea" ? "La pub souhaitée" : "Mon activité") + " :\n" + ($("#cMsg").value.trim() || "-");
 }
