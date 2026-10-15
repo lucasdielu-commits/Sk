@@ -141,6 +141,7 @@ header.site:not(.solid) .btn-brand { background: var(--night); color: #fff; box-
 .chips9 button i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px rgba(255,255,255,.6); }
 .chips9 button:hover { transform: translateY(-2px); }
 .chips9 button[aria-pressed="true"] { background: #1D1325; color: #fff; }
+.fict-note { position: relative; z-index: 2; font: 500 .74rem var(--f-mono); letter-spacing: .04em; color: rgba(29,19,37,.75); text-align: center; margin-top: -6px; }
 .sound { border: 0; background: #FFFFFF; color: #1D1325; border-radius: 999px; padding: 9px 14px; font-weight: 600; font-size: .85rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 14px 26px -14px rgba(29,19,37,.8); transition: transform .2s var(--ease); }
 .sound:hover { transform: scale(1.04); }
 .sound svg { width: 16px; height: 16px; }
@@ -514,12 +515,13 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
           </div>
           <button class="sound" id="heroSound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path id="soundWave" d="M23 9l-6 6M17 9l6 6"/></svg><span id="soundLabel">Son</span></button>
         </div>
-        <div class="style-label" aria-live="polite"><small>Style</small><b id="styleName">Néon rétro</b><span id="styleFor">Bar, salle de jeux</span></div>
+        <div class="style-label" aria-live="polite"><small>Exemple · style</small><b id="styleName">Néon rétro</b><span id="styleFor">Bar, salle de jeux</span></div>
         <div class="stat-badge">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1325" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
           <b>10 000 vues</b><small>en une semaine pour un client</small>
         </div>
         <div class="chips9" id="chips9" role="group" aria-label="Choisir un style"></div>
+        <p class="fict-note">Exemples avec des marques fictives. On crée le style que vous voulez.</p>
       </div>
     </div>
   </section>
@@ -534,12 +536,12 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
           <span class="eyebrow">Tous les styles</span>
           <h2>Vous choisissez le style. <em>On crée la pub.</em></h2>
         </div>
-        <p class="lede">Six exemples parmi tout ce qu'on peut faire. Survolez pour un aperçu, cliquez pour regarder en grand avec le son.</p>
+        <p class="lede">Ces six marques sont <b style="color:#fff">fictives</b> : on les a inventées pour vous montrer ce qu'on sait faire. Pour vous, on crée le style que vous voulez, avec votre vraie marque. Survolez pour un aperçu, cliquez pour regarder en grand.</p>
       </div>
       <div class="gallery" id="gallery"></div>
       <div class="your-style rv">
         <div class="swatches" aria-hidden="true" id="swatches"></div>
-        <div><h3>Votre style n'est pas dans la liste ?</h3><p>Montrez-nous une pub que vous aimez, ou décrivez l'ambiance : on la crée pour votre marque.</p></div>
+        <div><h3>Le style que vous voulez, pour votre marque.</h3><p>Ces exemples ne sont qu'un aperçu. Montrez-nous une pub que vous aimez, ou décrivez l'ambiance : on crée votre style sur mesure.</p></div>
         <a class="btn btn-brand" href="#contact" data-style-pick="Autre">Décrire mon style <span class="arr">→</span></a>
       </div>
     </div>
@@ -794,7 +796,7 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
         <a class="btn btn-ink" href="#contact" style="justify-self:start">Poser ma question <span class="arr">→</span></a>
       </div>
       <div class="faq">
-        <details open><summary><span class="q">01</span>Quels styles de pub pouvez-vous faire ?</summary><p>Tous ceux que vous voulez. Les six exemples du site (encre japonaise, néon rétro, luxe doré, pop coloré, papier découpé, motion tech) ne sont qu'un aperçu. Montrez-nous une pub qui vous plaît ou décrivez l'ambiance, et on l'adapte à votre marque.</p></details>
+        <details open><summary><span class="q">01</span>Quels styles de pub pouvez-vous faire ?</summary><p>Tous ceux que vous voulez. Les six exemples du site (encre japonaise, néon rétro, luxe doré, pop coloré, papier découpé, motion tech) utilisent des marques fictives, inventées pour vous montrer ce qu'on sait faire. Montrez-nous une pub qui vous plaît ou décrivez l'ambiance, et on l'adapte à votre marque.</p></details>
         <details><summary><span class="q">02</span>Quelles photos dois-je envoyer ?</summary><p>Vos produits, votre boutique, votre logo, même prises au téléphone. Plus vous en envoyez, plus on a de matière. Si une photo ne convient pas, on vous le dit tout de suite.</p></details>
         <details><summary><span class="q">03</span>Je ne sais pas quelle pub faire, vous pouvez m'aider ?</summary><p>Oui. Choisissez « Proposez-moi » dans le formulaire, parlez-nous de votre activité, et on vous propose deux ou trois idées avant de commencer.</p></details>
         <details><summary><span class="q">04</span>Vous utilisez l'IA ?</summary><p>Un peu, et on le dit : environ 20 % du travail. Elle nous aide à explorer des pistes d'accroches et à décliner une pub dans plusieurs formats. L'idée, le montage, les textes et chaque retouche sont faits par l'équipe, et rien ne part sans avoir été relu.</p></details>
@@ -899,9 +901,9 @@ $("#heroSound").addEventListener("click", () => { if (hv.muted) $("#stageVideo")
 /* ===== Galerie des styles ===== */
 $("#gallery").innerHTML = STYLES.map((st, i) => `<button class="tile rv" type="button" data-tile="${i}" style="--c:${st.c}" aria-label="Regarder la pub ${st.name}">
   <img src="${st.poster}" alt="" loading="lazy"><video muted playsinline loop preload="none" data-src="${st.src}"></video>
-  <span class="tnum">${pad(i + 1)} / ${pad(STYLES.length)}</span>
+  <span class="tnum">Exemple ${pad(i + 1)} / ${pad(STYLES.length)}</span>
   <span class="tplay" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#1D1325"/></svg></span>
-  <span class="tbody"><span class="tbrand">${st.brand}</span><h3>${st.name}</h3><span class="tags">${st.tags.map(t => `<span>${t}</span>`).join("")}</span></span></button>`).join("");
+  <span class="tbody"><span class="tbrand">Marque fictive · ${st.brand}</span><h3>${st.name}</h3><span class="tags">${st.tags.map(t => `<span>${t}</span>`).join("")}</span></span></button>`).join("");
 $("#swatches").innerHTML = STYLES.map(st => `<i style="background:${st.c}"></i>`).join("");
 function previewTile(tile, on) {
   const v = tile.querySelector("video");
@@ -934,9 +936,9 @@ function showViewer(i) {
   viewer.style.setProperty("--c", st.c);
   vv.src = st.src; vv.poster = st.poster; vv.muted = false; vv.play().catch(() => {});
   viewer.querySelector(".count").textContent = pad(vi + 1) + " / " + pad(STYLES.length);
-  viewer.querySelector(".tbrand").textContent = st.brand;
+  viewer.querySelector(".tbrand").textContent = "Marque fictive · " + st.brand;
   viewer.querySelector("h3").textContent = st.name;
-  viewer.querySelector("p").textContent = st.desc;
+  viewer.querySelector("p").textContent = st.desc + " Pub d'exemple : on crée ce style, ou un autre, pour votre marque.";
 }
 function openViewer(i) {
   lastFocus = document.activeElement;
