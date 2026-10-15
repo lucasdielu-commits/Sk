@@ -120,17 +120,18 @@ header.site:not(.solid) .btn-brand { background: var(--night); color: #fff; box-
 /* Studio de style : téléphone qui joue la pub du style choisi */
 .style-stage { position: relative; min-width: 0; display: grid; justify-items: center; gap: 18px; padding-block: 10px 30px; --glow: #FF3EA5; }
 .ghost { position: absolute; z-index: 0; top: 46%; left: 50%; transform: translate(-50%, -50%); font-family: var(--f-display); font-weight: 800; font-size: clamp(4rem, 11vw, 9rem); line-height: .8; letter-spacing: -.06em; color: rgba(29,19,37,.1); text-align: center; white-space: nowrap; pointer-events: none; transition: opacity .4s; }
-.phone { position: relative; z-index: 1; width: min(300px, 70vw); aspect-ratio: 9 / 19; border-radius: 44px; background: #0E0A12; padding: 11px; box-shadow: 0 0 0 2px #2E2436, 0 50px 90px -40px rgba(29,19,37,.9), 0 0 120px -20px var(--glow); transition: box-shadow .8s var(--ease); animation: lift 1.1s var(--ease) backwards .1s; }
+.phone { position: relative; z-index: 1; width: min(320px, 74vw); border-radius: 40px; background: #0E0A12; padding: 30px 10px 22px; box-shadow: 0 0 0 2px #2E2436, 0 50px 90px -40px rgba(29,19,37,.9), 0 0 120px -20px var(--glow); transition: box-shadow .8s var(--ease); animation: lift 1.1s var(--ease) backwards .1s; }
 @keyframes lift { from { transform: translateY(40px) rotate(3deg) scale(.96); } }
-.phone::before { content: ""; position: absolute; top: 19px; left: 50%; transform: translateX(-50%); width: 84px; height: 24px; border-radius: 999px; background: #0E0A12; z-index: 3; }
-.screen9 { position: relative; height: 100%; border-radius: 34px; overflow: hidden; background: #000; }
-.screen9 video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.phone::before { content: ""; position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 70px; height: 12px; border-radius: 999px; background: #241B2C; z-index: 3; }
+.phone::after { content: ""; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 90px; height: 4px; border-radius: 999px; background: #3A2E44; }
+.screen9 { position: relative; aspect-ratio: 9 / 16; width: 100%; border-radius: 16px; overflow: hidden; background: #000; }
+.screen9 video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .screen9 .veil { position: absolute; inset: 0; background: #000; opacity: 0; transition: opacity .35s; pointer-events: none; }
 .screen9.switching .veil { opacity: 1; }
-.screen9 .prog9 { position: absolute; top: 12px; left: 16px; right: 16px; display: flex; gap: 4px; z-index: 2; }
-.screen9 .prog9 i { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.35); overflow: hidden; }
-.screen9 .prog9 i b { display: block; height: 100%; width: 0; background: #fff; }
-.screen9 .prog9 i.done b { width: 100%; }
+.prog9 { position: absolute; top: 22px; left: 20px; right: 20px; display: flex; gap: 4px; z-index: 2; }
+.prog9 i { flex: 1; height: 3px; border-radius: 3px; background: rgba(255,255,255,.22); overflow: hidden; }
+.prog9 i b { display: block; height: 100%; width: 0; background: #fff; }
+.prog9 i.done b { width: 100%; }
 .phone .sound { position: absolute; z-index: 4; right: -16px; bottom: 70px; }
 .style-label { position: absolute; z-index: 4; left: -40px; top: 64px; background: #FFFFFF; color: #1D1325; border-radius: 16px; padding: 10px 14px; box-shadow: 0 20px 34px -18px rgba(29,19,37,.7); display: grid; gap: 1px; transform: rotate(-4deg); min-width: 150px; }
 .style-label small { font: 500 .66rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #655A6C; }
@@ -519,9 +520,9 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
         <div class="phone">
           <div class="screen9" id="screen9">
             <video id="heroVideo" autoplay muted playsinline preload="auto" aria-label="Exemple de pub dans le style choisi"></video>
-            <div class="prog9" id="prog9" aria-hidden="true"></div>
             <span class="veil"></span>
           </div>
+          <div class="prog9" id="prog9" aria-hidden="true"></div>
           <button class="sound" id="heroSound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path id="soundWave" d="M23 9l-6 6M17 9l6 6"/></svg><span id="soundLabel">Son</span></button>
         </div>
         <div class="style-label" aria-live="polite"><small>Exemple · style</small><b id="styleName">Néon rétro</b><span id="styleFor">Bar, salle de jeux</span></div>
