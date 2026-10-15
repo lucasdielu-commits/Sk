@@ -203,11 +203,20 @@ header.site:not(.solid) .btn-brand { background: var(--night); color: #fff; box-
 .cell .num { position: absolute; left: 10px; top: 8px; font: 500 .7rem var(--f-mono); background: rgba(0,0,0,.55); padding: 2px 6px; border-radius: 4px; }
 .cell .prog { position: absolute; left: 0; bottom: 0; height: 3px; background: var(--brand); width: 0; }
 /* Résultat */
-.result { margin-top: clamp(32px, 5vw, 56px); display: grid; grid-template-columns: auto 1fr auto; gap: 20px 40px; align-items: center; padding-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--night-line); }
-@media (max-width: 860px) { .result { grid-template-columns: 1fr; } }
-.result .num { font-family: var(--f-display); font-weight: 800; font-size: clamp(4rem, 11vw, 8rem); line-height: .85; letter-spacing: -.05em; color: var(--brand); font-variant-numeric: tabular-nums; }
-.result .num small { display: block; font-family: var(--f-mono); font-weight: 500; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--on-night); margin-top: 14px; }
-.result p { font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.45; max-width: 34ch; }
+.result { margin-top: clamp(32px, 5vw, 56px); display: grid; gap: clamp(18px, 3vw, 28px); padding-top: clamp(28px, 4vw, 40px); border-top: 1px solid var(--night-line); }
+.result-head { display: flex; justify-content: space-between; align-items: end; gap: 20px 40px; flex-wrap: wrap; }
+.result p { font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.45; max-width: 44ch; }
+.kpis { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(10px, 2vw, 18px); }
+@media (max-width: 860px) { .kpis { grid-template-columns: 1fr 1fr; } .kpi.big { grid-column: 1 / -1; } }
+.kpi { background: var(--night-2); border-radius: 22px; padding: clamp(18px, 2.6vw, 28px); display: grid; gap: 10px; box-shadow: inset 0 0 0 1px var(--night-line); min-width: 0; position: relative; overflow: hidden; }
+.kpi.big { background: var(--brand); color: #1D1325; box-shadow: none; }
+.kpi .kico { width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; background: rgba(255,255,255,.08); }
+.kpi.big .kico { background: rgba(29,19,37,.14); }
+.kpi .kico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.kpi .n { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: .9; letter-spacing: -.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.kpi.big .n { font-size: clamp(3.4rem, 9vw, 6.4rem); }
+.kpi .l { font: 500 .76rem var(--f-mono); letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+.kpi:not(.big) .n { color: var(--on-night); }
 .result p b { color: #fff; font-weight: 700; }
 .spark { width: 240px; max-width: 100%; height: 100px; overflow: visible; }
 .spark .grid line { stroke: var(--night-line); stroke-width: 1; }
@@ -518,7 +527,7 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
         <div class="style-label" aria-live="polite"><small>Exemple · style</small><b id="styleName">Néon rétro</b><span id="styleFor">Bar, salle de jeux</span></div>
         <div class="stat-badge">
           <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1D1325" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
-          <b>10 000 vues</b><small>en une semaine pour un client</small>
+          <b>10 124 vues</b><small>1 484 likes pour un client</small>
         </div>
         <div class="chips9" id="chips9" role="group" aria-label="Choisir un style"></div>
         <p class="fict-note">Exemples avec des marques fictives. On crée le style que vous voulez.</p>
@@ -553,7 +562,7 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
       <div class="section-head split">
         <div style="display:grid; gap:16px;">
           <span class="eyebrow">Réalisation · e-commerce</span>
-          <h2>Une campagne, 10 000 vues.</h2>
+          <h2>Une campagne, 10 124 vues.</h2>
         </div>
         <p class="lede">Trois vidéos réalisées pour une boutique de soins du visage. Faites défiler avec les flèches et lancez celle que vous voulez.</p>
       </div>
@@ -577,8 +586,8 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
       </div>
 
       <div class="result rv">
-        <div class="num"><span id="views">10 000</span><small>vues en 1 semaine</small></div>
-        <p>Ces publicités ont permis à cette boutique de générer <b>10 000 vues sur les réseaux sociaux en une semaine</b>.</p>
+        <div class="result-head">
+        <p>Ces publicités ont permis à cette boutique de générer <b>10&nbsp;124&nbsp;vues</b> sur les réseaux sociaux en une semaine, <b>1&nbsp;484&nbsp;likes</b> et <b>plus de 200&nbsp;visites</b> sur le site promu.</p>
         <svg class="spark" id="spark" viewBox="0 0 240 100" aria-hidden="true">
           <defs><linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF5A2C" stop-opacity=".45"/><stop offset="1" stop-color="#FF5A2C" stop-opacity="0"/></linearGradient></defs>
           <g class="grid"><line x1="8" y1="20" x2="232" y2="20"/><line x1="8" y1="50" x2="232" y2="50"/><line x1="8" y1="80" x2="232" y2="80"/></g>
@@ -587,6 +596,12 @@ footer.site { background: var(--brand); color: #1D1325; padding-block: clamp(56p
           <circle cx="230" cy="12" r="6"/>
           <text x="8" y="98">J1</text><text x="218" y="98">J7</text>
         </svg>
+        </div>
+        <div class="kpis">
+          <div class="kpi big"><span class="kico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="n" data-count="10124">10 124</span><span class="l">vues sur les réseaux</span></div>
+          <div class="kpi"><span class="kico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span><span class="n" data-count="1484">1 484</span><span class="l">likes</span></div>
+          <div class="kpi"><span class="kico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><span class="n" data-count="200" data-prefix="+">+200</span><span class="l">visites sur le site</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1181,11 +1196,13 @@ $("#copySummary").addEventListener("click", () => {
 goStep(0);
 
 /* ===== Animations au défilement ===== */
-const viewsEl = $("#views");
+const viewsEl = $(".kpis");
 function countUp() {
-  const target = 10000, t0 = performance.now(), dur = 1600;
-  (function f(now) { const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
-    viewsEl.textContent = Math.round(target * e).toLocaleString("fr-FR"); if (k < 1) requestAnimationFrame(f); })(t0);
+  $$("[data-count]").forEach(el => {
+    const target = +el.dataset.count, pre = el.dataset.prefix || "", t0 = performance.now(), dur = 1600;
+    (function f(now) { const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = pre + Math.round(target * e).toLocaleString("fr-FR"); if (k < 1) requestAnimationFrame(f); })(t0);
+  });
 }
 if ("IntersectionObserver" in window && !reduce) {
   const below = el => el.getBoundingClientRect().top > innerHeight;
@@ -1195,7 +1212,7 @@ if ("IntersectionObserver" in window && !reduce) {
     if (!x.isIntersecting) return;
     const el = x.target; io.unobserve(el);
     if (el.classList.contains("rv")) el.classList.remove("pre");
-    if (el.id === "views") countUp();
+    if (el === viewsEl) countUp();
     if (el.id === "spark") el.classList.remove("pre");
     if (el.id === "timeline") playTL();
     if (el.classList.contains("mix-tracks")) fillMix();
